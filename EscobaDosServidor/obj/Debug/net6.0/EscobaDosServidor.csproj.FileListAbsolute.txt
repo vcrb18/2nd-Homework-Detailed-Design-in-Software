@@ -1,0 +1,15 @@
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\bin\Debug\net6.0\EscobaDosServidor.exe
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\bin\Debug\net6.0\EscobaDosServidor.deps.json
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\bin\Debug\net6.0\EscobaDosServidor.runtimeconfig.json
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\bin\Debug\net6.0\EscobaDosServidor.dll
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\bin\Debug\net6.0\EscobaDosServidor.pdb
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.csproj.AssemblyReference.cache
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.AssemblyInfoInputs.cache
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.AssemblyInfo.cs
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.csproj.CoreCompileInputs.cache
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.dll
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\refint\EscobaDosServidor.dll
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.pdb
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\EscobaDosServidor.genruntimeconfig.cache
+C:\Users\vicru\RiderProjects\EscobaDos\EscobaDosServidor\obj\Debug\net6.0\ref\EscobaDosServidor.dll

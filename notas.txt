@@ -1,0 +1,17 @@
+Listas Cartas cero - Lista de Tres Cartas Sin Siete
+Lista Cartas uno - Lista de Tres Cartas con Siete de Oro
+Lista Cartas dos - Lista de Tres Cartas con Siete de Bastos
+Lista Cartas tres - Lista de Tres Cartas con Siete de Espadas
+Lista Cartas cuatro - Lista de Tres Cartas con Siete de Copa
+
+Jugada uno - Lista Cartas cero
+Jugada dos - Lista Cartas uno
+Jugada tres - Lista Cartas dos
+Jugada cuatro - Lista Cartas tres
+Jugada cinco - Lista Cartas cuatro
+
+Jugador uno - List<Jugadas>: Jugada uno. Tiene 0 sietes.
+Jugador dos - List<Jugadas>: Jugada uno, Jugada dos. Tiene 1 siete.
+Jugador tres - List<Jugadas>: Jugada uno, Jugada dos, Jugada tres. Tiene 2 sietes.
+Jugador cuatro - List<Jugadas>: Jugada uno, Jugada dos, Jugada tres, Jugada cuatro. Tiene 3 sietes.
+Jugador cinco - List<Jugadas>: Jugada uno, Jugada dos, Jugada tres, Jugada cuatro, Jugada cinco. Tiene cuatro sietes.
