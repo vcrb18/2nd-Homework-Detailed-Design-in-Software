@@ -9,7 +9,7 @@ public class JugadoresTests
     {
         Jugadores jugadores = new Jugadores(2);
     
-        bool manosVacias = jugadores.ManosVacias();
+        bool manosVacias = jugadores.AmbosJugadoresTienenManosVacias();
         bool manoVaciaJugadorUno = jugadores.ObtenerJugador(0).ManoVacia();
         bool manoVaciaJugadorDos = jugadores.ObtenerJugador(1).ManoVacia();
         
@@ -24,7 +24,7 @@ public class JugadoresTests
         MazoCartas mazoCartas = new MazoCartas();
         jugadores.RepartirCartas(mazoCartas);
 
-        bool manosVacias = jugadores.ManosVacias();
+        bool manosVacias = jugadores.AmbosJugadoresTienenManosVacias();
 
         Assert.False(manosVacias);
     }
@@ -34,7 +34,7 @@ public class JugadoresTests
     {
         Jugadores jugadores = new Jugadores(2);
 
-        List<Jugador> jugadoresGanadores = jugadores.ObtenerListaJugadoresGanadores();
+        List<Jugador> jugadoresGanadores = jugadores.GanadorOGanadoresDelJuego();
         
         Assert.Equal(2, jugadoresGanadores.Count);
     }

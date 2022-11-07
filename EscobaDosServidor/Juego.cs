@@ -64,7 +64,7 @@ public class Juego
                 CambiarTurno();
             }
             // break;
-            if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.ManosVacias())
+            if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
             {
                 NuevoJuego();
             }
@@ -139,19 +139,19 @@ public class Juego
         if (AlgunJugadorGanoElJuego())
         {
             _vista.FinalDePartida();
-            List<Jugador> listaJugadoresGanadores = _jugadores.ObtenerListaJugadoresGanadores();
+            List<Jugador> listaJugadoresGanadores = _jugadores.GanadorOGanadoresDelJuego();
             if (listaJugadoresGanadores.Count == 1)
             {
-                int idJugadorGanador = _jugadores.ObtenerIdGanador(listaJugadoresGanadores);
+                int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaJugadoresGanadores);
                 Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
                 _vista.GanaUnJugador(jugadorGanador);
             }
             else if (listaJugadoresGanadores.Count == 2)
             {
-                int idJugadorGanadorUno = _jugadores.ObtenerIdGanador(listaJugadoresGanadores);
+                int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaJugadoresGanadores);
                 Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
                 
-                int idJugadorGanadorDos = _jugadores.ObtenerIdGanadorDos(listaJugadoresGanadores);
+                int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaJugadoresGanadores);
                 Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
                 
                 _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
@@ -183,7 +183,7 @@ public class Juego
     {
         if (_mazoCartas.SeAcabaronLasCartas())
         {
-            if (_jugadores.ManosVacias())
+            if (_jugadores.AmbosJugadoresTienenManosVacias())
             {
                 // Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(_idUltimoJugadorEnLlevarseLasCartas);
                 // Console.WriteLine($"Jugadas pre Ultima jugada jugador {jugadorEnLlevarseLasCartas._id}: {jugadorEnLlevarseLasCartas.NumeroDeJugadas()}");
@@ -417,7 +417,7 @@ public class Juego
 
     private void SiNoTienenCartasSeReparte()
     {
-        if (_jugadores.ManosVacias())
+        if (_jugadores.AmbosJugadoresTienenManosVacias())
         {
             if (_mazoCartas.SeAcabaronLasCartas())
             {
