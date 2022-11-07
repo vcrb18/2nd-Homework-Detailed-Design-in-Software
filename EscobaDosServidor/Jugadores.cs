@@ -39,6 +39,7 @@ public class Jugadores
     {
         foreach (var jugador in _jugadores)
         {
+            Vista.EscribeJugador(jugador);
             jugador.MostrarCartasGanadas();
         }
     }

@@ -9,13 +9,6 @@ public class Carta
         _valor = valor;
     }
 
-    public override string ToString()
-    {
-        string valorToString = _valor.ToString();
-        string descripcionCarta = valorToString + "_" + _pinta;
-        return descripcionCarta;
-    }
-
     public string Pinta
     {
         get { return _pinta; }
@@ -26,26 +19,34 @@ public class Carta
         get { return _valor; }
     }
     
-    public int ConvierteValorAInt()
+    public override string ToString()
     {
-        Dictionary<string, int> dictionaryStringToInt = hashValorCarta();
-        return dictionaryStringToInt[_valor];
+        string descripcionCarta = _valor + "_" + _pinta;
+        return descripcionCarta;
+    }
+    
+    public int ConvierteStringValorAInt()
+    {
+        Dictionary<string, int> diccionarioDeValoresCarta = DiccionarioDeValoresCarta();
+        return diccionarioDeValoresCarta[_valor];
     }
 
-    public static Dictionary<string, int> hashValorCarta()
+    public static Dictionary<string, int> DiccionarioDeValoresCarta()
     {
-        Dictionary<string, int> dictionaryStringToInt = new Dictionary<string, int>();
-        dictionaryStringToInt.Add("1", 1);
-        dictionaryStringToInt.Add("2", 2);
-        dictionaryStringToInt.Add("3", 3);
-        dictionaryStringToInt.Add("4", 4);
-        dictionaryStringToInt.Add("5", 5);
-        dictionaryStringToInt.Add("6", 6);
-        dictionaryStringToInt.Add("7", 7);
-        dictionaryStringToInt.Add("Sota", 8);
-        dictionaryStringToInt.Add("Caballo", 9);
-        dictionaryStringToInt.Add("Rey", 10);
-        return dictionaryStringToInt;
+        Dictionary<string, int> diccionarioDeValoresCarta = new Dictionary<string, int>
+        {
+            {"1", 1},
+            {"2", 2},
+            {"3", 3},
+            {"4", 4},
+            {"5", 5},
+            {"6", 6},
+            {"7", 7},
+            {"Sota", 8},
+            {"Caballo", 9},
+            {"Rey", 10},
+        };
+        return diccionarioDeValoresCarta;
     }
     
 }

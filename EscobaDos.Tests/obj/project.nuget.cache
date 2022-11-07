@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oxKLvQRX+yuJ8fQtJBD8+MKQ8MlKfaXBtDwCgl8gOjWFXAgjp7tMH3URMbNYplIUANqymoY9nsdafBc/Pj3+RQ==",
+  "dgSpecHash": "rf3Mj/Rlemp2KRs2AVQ10jnPuPos5NXmbsxBeWCNSnAskIrrikz8CEJ1qnEcR5+BaAoYh519GPv21fDrHZ7vIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDos.Tests\\EscobaDos.Tests.csproj",
+  "projectFilePath": "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDos.Tests\\EscobaDos.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vicru\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\vicru\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",

@@ -1,8 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\vicru\AppData\Local\JetBrains\Rider2022.2\resharper-host\temp\Rider\vAny\CoverageData\_EscobaDos.-103843086\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\vicru\AppData\Local\JetBrains\Rider2022.2\resharper-host\temp\Rider\vAny\CoverageData\_EscobaDos.-1586622624\Snapshot\snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6f05e3a8_002Dee58_002D4619_002Db464_002D2ad24cf0deae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;EscobaDos.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\vicru\RiderProjects\EscobaDos\EscobaDos.Tests" Presentation="&amp;lt;EscobaDos.Tests&amp;gt;" /&gt;&#xD;
+  &lt;Project Location="C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDos.Tests" Presentation="&amp;lt;EscobaDos.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7e1c9d9f_002D91cf_002D46a4_002D9b47_002Df6b62e505f12/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;EscobaDos.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\vicru\RiderProjects\EscobaDos\EscobaDos.Tests" Presentation="&amp;lt;EscobaDos.Tests&amp;gt;" /&gt;&#xD;
+  &lt;Project Location="C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDos.Tests" Presentation="&amp;lt;EscobaDos.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

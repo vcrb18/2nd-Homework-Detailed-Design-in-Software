@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDosServidor\\EscobaDosServidor.csproj": {}
+    "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDosServidor\\EscobaDosServidor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDosServidor\\EscobaDosServidor.csproj": {
+    "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDosServidor\\EscobaDosServidor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDosServidor\\EscobaDosServidor.csproj",
+        "projectUniqueName": "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDosServidor\\EscobaDosServidor.csproj",
         "projectName": "EscobaDosServidor",
-        "projectPath": "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDosServidor\\EscobaDosServidor.csproj",
+        "projectPath": "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDosServidor\\EscobaDosServidor.csproj",
         "packagesPath": "C:\\Users\\vicru\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vicru\\RiderProjects\\EscobaDos\\EscobaDosServidor\\obj\\",
+        "outputPath": "C:\\Users\\vicru\\Documents\\2022-02\\Diseño_detallado\\Tarea2\\2nd-Homework-Detailed-Design-in-Software\\EscobaDosServidor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vicru\\AppData\\Roaming\\NuGet\\NuGet.Config"

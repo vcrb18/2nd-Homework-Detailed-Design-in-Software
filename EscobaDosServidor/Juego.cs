@@ -13,11 +13,12 @@ public class Juego
     private int _idJugadorPartidor = 1;
     private static MazoCartas _mazoCartas;
     private static CartasEnMesa _cartasEnMesa;
-    private static Vista _vista = new Vista();
+    private static Vista _vista;
     private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>();
 
-    public Juego()
+    public Juego(Vista vista)
     {
+        _vista = vista;
         CrearJugadores();
         CrearMazo();
         BarajarMazo();
@@ -25,7 +26,9 @@ public class Juego
         PonerMesa();
     }
     
-    public static Juego CrearConJugadorAleatorio() => new Juego();
+    public static Juego Crear() => new Juego(new Vista());
+
+    public static Juego CrearConJugadorAleatorio() => new Juego(new VistaJugadorAleatorio());
 
     private void CrearJugadores() => _jugadores = new Jugadores(NumJugadores);
     private void CrearMazo() => _mazoCartas = new MazoCartas();
@@ -125,7 +128,7 @@ public class Juego
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorRepartidor);
         GuardarUltimoJugadorEnLlevarseCartas(jugador);
         jugador.AgregarJugada(jugada);
-        _cartasEnMesa.SacarCartas(jugada.CartasQueFormanJugada);
+        _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
         _vista.MostrarEscoba(jugador);
     }
@@ -294,9 +297,9 @@ public class Juego
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
         GuardarUltimoJugadorEnLlevarseCartas(jugador);
         jugador.AgregarJugada(jugada);
-        _cartasEnMesa.SacarCartas(jugada.CartasQueFormanJugada);
+        _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
-        _vista.MostrarEscoba(jugador);
+        // _vista.MostrarEscoba(jugador);
     }
 
     private void CalcularJugadas(Carta cartaAJugar)
@@ -338,7 +341,7 @@ public class Juego
     private void sum_up_recursive_casoBorde(List<Carta> numbers, int target, List<Carta> partial)
     {
         int s = 0;
-        foreach (Carta x in partial) s += x.ConvierteValorAInt();
+        foreach (Carta x in partial) s += x.ConvierteStringValorAInt();
 
         if (s == target)
             // Console.WriteLine(partial.ToArray());
@@ -369,7 +372,7 @@ public class Juego
     private void sum_up_recursive(List<Carta> numbers, int target, List<Carta> partial, Carta cartaObligatoria)
     {
         int s = 0;
-        foreach (Carta x in partial) s += x.ConvierteValorAInt();
+        foreach (Carta x in partial) s += x.ConvierteStringValorAInt();
 
         if (s == target)
             // Console.WriteLine(partial.ToArray());
@@ -401,8 +404,9 @@ public class Juego
 
     private void GuardaJugada(List<Carta> cartasQueSumanQuince)
     {
-        Jugada jugadaPosible = new Jugada(cartasQueSumanQuince, true);
-        _listaDeJugadasPosibles.Add(jugadaPosible);
+        bool laJugadaEsUnaEscoba = _cartasEnMesa.LaJugadaEsUnaEscoba(cartasQueSumanQuince);
+        Jugada jugada = new Jugada(cartasQueSumanQuince, laJugadaEsUnaEscoba);
+        _listaDeJugadasPosibles.Add(jugada);
     }
 
     private void ResetearJugadas()
@@ -438,7 +442,7 @@ public class Juego
 
         jugadorEnLlevarseLasCartas.AgregarJugada(cartasSobrantes);
         _vista.SeLlevaLasUltimasCartas(jugadorEnLlevarseLasCartas, cartasSobrantes);
-        _cartasEnMesa.SacarCartas(cartasSobrantes.CartasQueFormanJugada);
+        _cartasEnMesa.SacarCartasDeLaMesa(cartasSobrantes.CartasQueFormanJugada);
     }
     
     public static void CambiarTurno()

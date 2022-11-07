@@ -2,12 +2,12 @@ namespace Servidor;
 
 public class CartasEnMesa
 {
-    private const int NumCartasMesaInicial = 4;
+    private const int NumeroCartasMesaInicialmente = 4;
     private List<Carta> _cartasEnMesa = new List<Carta>();
 
     public CartasEnMesa(MazoCartas mazoCartas)
     {
-        for (int i = 0; i < NumCartasMesaInicial; i++)
+        for (int i = 0; i < NumeroCartasMesaInicialmente; i++)
         {
             _cartasEnMesa.Add(mazoCartas.SacarCartaDeArriba());
         }
@@ -23,9 +23,15 @@ public class CartasEnMesa
         _cartasEnMesa.Add(carta);
     }
 
-    public void SacarCartas(List<Carta> cartas)
+    public void SacarCartasDeLaMesa(List<Carta> cartas)
     {
-        List<Carta> result = _cartasEnMesa.Except(cartas).ToList();
-        _cartasEnMesa = result;
+        List<Carta> mesaConCartasYaRetiradas = _cartasEnMesa.Except(cartas).ToList();
+        _cartasEnMesa = mesaConCartasYaRetiradas;
+    }
+
+    public bool LaJugadaEsUnaEscoba(List<Carta> cartasJugada)
+    {
+        bool laJugadaEsUnaEscoba = _cartasEnMesa.All(cartaMesa => cartasJugada.Contains(cartaMesa));
+        return laJugadaEsUnaEscoba;
     }
 }

@@ -51,7 +51,7 @@ public class Vista
         return nrCartaEscogida;
     }
 
-    private int PedirNumeroValido(int minValue, int maxValue)
+    protected virtual int PedirNumeroValido(int minValue, int maxValue)
     {
         int numero;
         bool fuePosibleTransformarElString;
@@ -81,6 +81,10 @@ public class Vista
     {
         // Console.WriteLine($"Jugador {jugador._id} se lleva las siguientes cartas: {MostrarEscoba(jugada.Escoba())}");
         Console.WriteLine($"Jugador {jugador._id} se lleva las siguientes cartas: {jugada.ToString()}");
+        if (jugada.EsEscoba)
+        {
+            MostrarEscoba(jugador);
+        }
     }
 
     public void MostrarEscoba(Jugador jugador)
@@ -151,7 +155,12 @@ public class Vista
 
     public static void MostrarJugada(Jugador jugador, Jugada jugada)
     {
-        Console.WriteLine($"    Jugador {jugador._id}:");
+        // Console.WriteLine($"    Jugador {jugador._id}:");
         Console.WriteLine(jugada);
+    }
+
+    public static void EscribeJugador(Jugador jugador)
+    {
+        Console.WriteLine($"Jugador {jugador._id}:");
     }
 }

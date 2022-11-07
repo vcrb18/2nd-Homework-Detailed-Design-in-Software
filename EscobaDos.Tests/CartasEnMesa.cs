@@ -33,7 +33,7 @@ public class CartasEnMesaTests
         cartasADescartar.Add(primeraCartaADescartar);
         cartasADescartar.Add(segundaCartaADescartar);
         
-        cartasEnMesa.SacarCartas(cartasADescartar);
+        cartasEnMesa.SacarCartasDeLaMesa(cartasADescartar);
         List<Carta> cartasEnMesaDespuesDeSacar = cartasEnMesa.CartasDeLaMesa;
         int numeroCartasEnMesaDespuesDeSacar = cartasEnMesaDespuesDeSacar.Count;
 
