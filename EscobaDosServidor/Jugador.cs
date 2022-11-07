@@ -6,33 +6,37 @@ public class Jugador
 {
     private List<Carta> _mano = new List<Carta>();
     private int _puntaje = 0;
-    public int _id; // ARREGLAR
+    private int _id;
     private List<Jugada> _listaDeJugadas = new List<Jugada>();
+    private CalculadorPuntajeJugadorPorRonda _calculadorPuntajeJugadorPorRonda;
 
     public Jugador(int id)
     {
         _id = id;
+        _calculadorPuntajeJugadorPorRonda = new CalculadorPuntajeJugadorPorRonda(this);
     }
-
-    public void AgregarCartaAMano(Carta carta)
+    public List<Carta> Mano
     {
-        _mano.Add(carta);
-    }
-
-    public List<Jugada> ListaDeJugadas
-    {
-        get { return _listaDeJugadas;  }
+        get { return _mano; }
     }
     public int Puntaje
     {
         get { return _puntaje;  }
     }
 
-    public List<Carta> Mano
+    public int Id
     {
-        get { return _mano; }
+        get { return _id;  }
     }
-
+    public List<Jugada> ListaDeJugadas
+    {
+        get { return _listaDeJugadas;  }
+    }
+    public void AgregarCartaAMano(Carta carta)
+    {
+        _mano.Add(carta);
+    }
+    
     public void AgregarJugada(Jugada jugada)
     {
         _listaDeJugadas.Add(jugada);
@@ -66,156 +70,14 @@ public class Jugador
 
     public void CalcularPuntaje()
     {
-        PuntajePorEscoba();
-        PuntajePorSieteDeOro();
-        PuntajePorMayoriaDeSietes();
-        PuntajePorMayoriaDeCartas();
-        PuntajePorMayoriaDeOros();
+        _calculadorPuntajeJugadorPorRonda.ReiniciaPuntajeACero();
+        _calculadorPuntajeJugadorPorRonda.CalculaPuntaje();
+        _puntaje += _calculadorPuntajeJugadorPorRonda.Puntaje;
     }
 
-    public void PuntajePorEscoba()
+    public void ReiniciarListaJugadas()
     {
-        _puntaje += NumeroDeEscobas();
-    }
-
-    public void PuntajePorSieteDeOro()
-    {
-        if (TieneSieteDeOro())
-        {
-            _puntaje++;
-        }
-    }
-
-    public void PuntajePorMayoriaDeSietes()
-    {
-        if (TieneMayoriaDeSietes())
-        {
-            _puntaje++;
-        }
-
-    }
-    private void PuntajePorMayoriaDeCartas()
-    {
-        if (TieneMayoriaDeCartas())
-        {
-            _puntaje++;
-        }
-
+        _listaDeJugadas = new List<Jugada>();
     }
     
-    private void PuntajePorMayoriaDeOros()
-    {
-        if (TieneMayoriaDeOros())
-        {
-            _puntaje++;
-        }
-
-    }
-    
-    public int NumeroDeEscobas()
-    {
-        int numeroDeEscobas = 0;
-        foreach (var jugada in _listaDeJugadas)
-        {
-            if (jugada.EsEscoba)
-            {
-                numeroDeEscobas++;
-            }
-        }
-
-        return numeroDeEscobas;
-    }
-
-    public bool TieneSieteDeOro()
-    {
-        bool tieneSieteDeOro = false;
-        foreach (var jugada in _listaDeJugadas)
-        {
-            if (jugada.TieneSieteDeOro())
-            {
-                tieneSieteDeOro = true;
-            }
-        }
-
-        return tieneSieteDeOro;
-    }
-
-    public bool TieneMayoriaDeSietes()
-    {
-        bool tieneMayoriaDeSietes = false;
-        int numeroDeSietes = 0;
-        foreach (var jugada in _listaDeJugadas)
-        {
-            int numeroDeSietesEnJugada = jugada.TieneMayoriaDeSietes();  // Retorna el numero de sietes en la jugada
-            // if (jugada.TieneMayoriaDeSietes())
-            // {
-            //     tieneMayoriaDeSietes = true;
-            // }
-            numeroDeSietes += numeroDeSietesEnJugada;
-        }
-
-        if (numeroDeSietes >= 2)
-        {
-            tieneMayoriaDeSietes = true;
-        }
-
-        return tieneMayoriaDeSietes;
-    }
-
-    public bool TieneMayoriaDeCartas()
-    {
-        bool tieneMayoriaDeCartas = false;
-        int numCartas = 0;
-        foreach (var jugada in _listaDeJugadas)
-        {
-            numCartas += jugada.NumeroDeCartasDeJugada;
-        }
-
-        if (TieneMasDeVeinteCartas(numCartas))
-        {
-            tieneMayoriaDeCartas = true;
-        }
-        return tieneMayoriaDeCartas;
-    }
-
-    public bool TieneMasDeVeinteCartas(int numCartas)
-    {
-        if (numCartas >= 20)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public bool TieneMayoriaDeOros()
-    {
-        bool tieneMayoriaDeOros = false;
-        int numOros = 0;
-        foreach (var jugada in _listaDeJugadas)
-        {
-            numOros += jugada.NumeroDeOrosEnJugada();
-        }
-
-        if (TieneMasDeCincoOros(numOros))
-        {
-            tieneMayoriaDeOros = true;
-        }
-
-        return tieneMayoriaDeOros;
-    }
-
-    public bool TieneMasDeCincoOros(int numOros)
-    {
-        if (numOros >= 5)
-        {
-            return true; 
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

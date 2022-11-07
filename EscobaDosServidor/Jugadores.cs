@@ -79,12 +79,20 @@ public class Jugadores
 
     public int ObtenerIdGanador(List<Jugador> listaJugadorGanador)
     {
-        return listaJugadorGanador[0]._id;
+        return listaJugadorGanador[0].Id;
     }
     
     public int ObtenerIdGanadorDos(List<Jugador> listaJugadorGanador)
     {
-        return listaJugadorGanador[1]._id;
+        return listaJugadorGanador[1].Id;
+    }
+
+    public void ReiniciarListaJugadas()
+    {
+        foreach (var jugador in _jugadores)
+        {
+            jugador.ReiniciarListaJugadas();
+        }
     }
     
     

@@ -59,7 +59,7 @@ public class Juego
             _vista.MostrarInfoInicial(_idJugadorRepartidor, _idJugadorPartidor);
             while (!EsFinMazoYManos())
             {
-                _mazoCartas.CuantasCartasQuedan();
+                Console.WriteLine(_mazoCartas.CuantasCartasQuedan());
                 JugarTurno();
                 CambiarTurno();
             }
@@ -210,6 +210,7 @@ public class Juego
 
     public void NuevoJuego()
     {
+        _jugadores.ReiniciarListaJugadas();
         CambiarRepartidorYJugador();
         CrearMazo();
         BarajarMazo();
@@ -459,7 +460,7 @@ public class Juego
 
     public static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)
     {
-        _idUltimoJugadorEnLlevarseLasCartas = jugador._id;
+        _idUltimoJugadorEnLlevarseLasCartas = jugador.Id;
     }
     
     

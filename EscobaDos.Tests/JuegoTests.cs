@@ -46,7 +46,7 @@ public class JuegoTests
     public void GuardarUltimoJugadorEnLlevarseCartas_GuardaIdCorrectamente()
     {
         Jugador jugador = new Jugador(0);
-        int idJugador = jugador._id;
+        int idJugador = jugador.Id;
         
         Juego.GuardarUltimoJugadorEnLlevarseCartas(jugador);
         int idJugadorEnLlevarseLasCartas = Juego.IdUltimoJugadorEnLlevarseLasCartas;

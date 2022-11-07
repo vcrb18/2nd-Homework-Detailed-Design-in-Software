@@ -15,7 +15,7 @@ public class Vista
     public void MostrarQuienJuega(Jugador jugador)
     {
         EscribeLineas();
-        Console.WriteLine($"Juega Jugador {jugador._id}");
+        Console.WriteLine($"Juega Jugador {jugador.Id}");
     }
 
     public void MostrarMesaActual(CartasEnMesa cartasEnMesa)
@@ -80,7 +80,7 @@ public class Vista
     public void JugadorSeLlevaLasCartas(Jugador jugador ,Jugada jugada)
     {
         // Console.WriteLine($"Jugador {jugador._id} se lleva las siguientes cartas: {MostrarEscoba(jugada.Escoba())}");
-        Console.WriteLine($"Jugador {jugador._id} se lleva las siguientes cartas: {jugada.ToString()}");
+        Console.WriteLine($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada.ToString()}");
         if (jugada.EsEscoba)
         {
             MostrarEscoba(jugador);
@@ -89,7 +89,7 @@ public class Vista
 
     public void MostrarEscoba(Jugador jugador)
     {
-        Console.WriteLine($"ESCOBA!************************************************** JUGADOR {jugador._id}");
+        Console.WriteLine($"ESCOBA!************************************************** JUGADOR {jugador.Id}");
     }
 
     public void NoHayEscoba()
@@ -109,7 +109,7 @@ public class Vista
         EscribeLineas();
         Console.WriteLine($"Se jugaron todas las cartas de la baraja");
         Console.WriteLine($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
-        Console.WriteLine($"Este es el jugador {jugador._id}!");
+        Console.WriteLine($"Este es el jugador {jugador.Id}!");
         JugadorSeLlevaLasCartas(jugador, jugada);
     }
 
@@ -126,7 +126,7 @@ public class Vista
         Console.WriteLine("Total puntos ganados");
         foreach (var jugador in jugadores.ObtenerJugadores)
         {
-            Console.WriteLine($"    Jugador {jugador._id}: {jugador.Puntaje}");
+            Console.WriteLine($"    Jugador {jugador.Id}: {jugador.Puntaje}");
         }
     }
 
@@ -145,22 +145,22 @@ public class Vista
 
     public void GanaUnJugador(Jugador jugador)
     {
-        Console.WriteLine($"El jugador {jugador._id} GANA LA PARTIDA CON {jugador.Puntaje} PUNTOS");
+        Console.WriteLine($"El jugador {jugador.Id} GANA LA PARTIDA CON {jugador.Puntaje} PUNTOS");
     }
 
     public void HuboUnEmpate(Jugador ganadorUno, Jugador ganadorDos)
     {
-        Console.WriteLine($"El jugador {ganadorUno._id} EMPATÓ con el jugador {ganadorDos._id} con un total de {ganadorUno.Puntaje} Puntos.");
+        Console.WriteLine($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
     }
 
     public static void MostrarJugada(Jugador jugador, Jugada jugada)
     {
         // Console.WriteLine($"    Jugador {jugador._id}:");
-        Console.WriteLine(jugada);
+        Console.WriteLine($"{jugada}. Es Escoba: {jugada.EsEscoba}");
     }
 
     public static void EscribeJugador(Jugador jugador)
     {
-        Console.WriteLine($"Jugador {jugador._id}:");
+        Console.WriteLine($"Jugador {jugador.Id}:");
     }
 }
