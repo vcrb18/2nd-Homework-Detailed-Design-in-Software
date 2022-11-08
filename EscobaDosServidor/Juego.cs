@@ -332,7 +332,18 @@ public class Juego
     private void GuardaJugadaSiSeCumplenLasCondiciones(int sumaValoresCarta, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria)
     {
         if (sumaValoresCarta == _target && cartasCandidatasParaSumarQuince.Contains(cartaObligatoria))
+        {
             GuardaJugada(cartasCandidatasParaSumarQuince);
+        }
+    }
+
+    private void GuardaJugadaSiSumanQuinceCasoBorde(int sumaValoresCarta, List<Carta> cartasCandidatasParaSumarQuince)
+    {
+        if (sumaValoresCarta == _target)
+        {
+            GuardaJugada(cartasCandidatasParaSumarQuince);
+        }
+            
     }
     
     private void GuardaJugada(List<Carta> cartasQueSumanQuince)
