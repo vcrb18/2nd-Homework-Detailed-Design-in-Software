@@ -5,7 +5,7 @@ namespace Servidor;
 public class MazoCartas
 {
     private List<Carta> _cartas;
-    private GeneradorNumerosAleatorios _rnd;
+    private GeneradorNumerosAleatorios generadorRandom = new GeneradorNumerosAleatorios();
 
     public MazoCartas()
     {
@@ -15,22 +15,17 @@ public class MazoCartas
     private void GenerarCartas()
     {
         _cartas = new List<Carta>();
-        List<string> valoresCartas = Valores();
+        List<string> valoresDeCartas = ValoresDeCartas();
         foreach (var pinta in Enum.GetValues(typeof(Pintas)))
         {
-            foreach (string valor in valoresCartas)
+            foreach (string valor in valoresDeCartas)
             {
                 _cartas.Add(new Carta(pinta.ToString(), valor));
             }
         }
     }
     
-    public List<Carta> Cartas
-    {
-        get { return _cartas; }
-    }
-
-    private List<string> Valores()
+    private List<string> ValoresDeCartas()
     {
         List<string> valoresCartas = new List<string>();
         valoresCartas.AddRange(new List<string>
@@ -48,6 +43,7 @@ public class MazoCartas
         });
         return valoresCartas;
     }
+
     private enum Pintas
     {
         Oro,
@@ -55,37 +51,47 @@ public class MazoCartas
         Copa,
         Bastos
     }
-
-    public void BarajarCartas()
+    
+    public List<Carta> Cartas
     {
-        GeneradorNumerosAleatorios generadorRandom = new GeneradorNumerosAleatorios();
-        int numCartas = _cartas.Count;
-        while (numCartas > 1)
-        {
-            numCartas--;
-            int k = generadorRandom.Generar(numCartas);
-            Carta value = _cartas[k];
-            _cartas[k] = _cartas[numCartas];
-            _cartas[numCartas] = value;
-        }
+        get { return _cartas; }
     }
 
+
+    public void AlgoritmoParaBarajarCartas()
+    {
+        int numeroCartasMazo = _cartas.Count;
+        while (numeroCartasMazo > 1)
+        {
+            numeroCartasMazo--;
+            int numeroAleatorio = generadorRandom.Generar(numeroCartasMazo);
+            Carta cartaSeleccionadaRandom = _cartas[numeroAleatorio];
+            _cartas[numeroAleatorio] = _cartas[numeroCartasMazo];
+            _cartas[numeroCartasMazo] = cartaSeleccionadaRandom;
+        }
+    }
+    
     public void DarCartasIniciales(Jugador jugador)
     {
         for (int i = 0; i < 3; i++)
         {
-            jugador.AgregarCartaAMano(SacarCartaDeArriba());
+            Carta cartaSuperiorMazo = CartaSuperiorMazo();
+            SacarCartaSuperiorMazo();
+            jugador.AgregarCartaAMano(cartaSuperiorMazo);
         }
     }
-
-    // Por ahora se asumira que es la primera carta de la lista
-    public Carta SacarCartaDeArriba()
+    
+    public Carta CartaSuperiorMazo()
     {
         Carta cartaDeArriba = _cartas[0];
-        _cartas.Remove(cartaDeArriba);
         return cartaDeArriba;
     }
 
+    public void SacarCartaSuperiorMazo()
+    {
+        _cartas.Remove(CartaSuperiorMazo());
+    }
+    
     public bool SeAcabaronLasCartas()
     {
         if (_cartas.Count == 0)

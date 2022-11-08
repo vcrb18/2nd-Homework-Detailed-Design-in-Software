@@ -25,27 +25,35 @@ public class Vista
         for (int i = 1; i < listaDeCartasEnLaMesa.Count + 1; i++)
         {
             Carta carta = listaDeCartasEnLaMesa[i - 1];
-            Console.WriteLine($"({i}) {carta.Valor}_{carta.Pinta}");
+            Console.WriteLine($"({i}) {carta}");
         }
     }
 
-    // Arreglar!
-    public Carta MostrarManoJugador(Jugador jugador)
+    public void MostrarManoJugador(Jugador jugador)
     {
         Console.WriteLine("\nMano Jugador:");
-        List<Carta> manoJugador = jugador.Mano;
-        for (int i = 1; i < manoJugador.Count + 1; i++)
+        for (int i = 1; i < jugador.Mano.Count + 1; i++)
         {
-            Carta carta = manoJugador[i - 1];
-            Console.WriteLine($"({i}) {carta.Valor}_{carta.Pinta}");
+            Carta carta = jugador.Mano[i - 1];
+            Console.WriteLine($"({i}) {carta}");
         }
         Console.WriteLine("¿Qué carta quieres bajar?");
-        Console.WriteLine($"(Ingresa un número entre 1 y {manoJugador.Count}");
-        int nrCartaEscogida = PedirJugada(1, manoJugador.Count);
-        return manoJugador[nrCartaEscogida - 1];
+        Console.WriteLine($"(Ingresa un número entre 1 y {jugador.Mano.Count}");
+    }
+    
+    public int PedirJugada(List<Jugada> jugadas)
+    {
+        Console.WriteLine($"Hay {jugadas.Count} jugadas en la mesa:");
+        for (int i = 1; i < jugadas.Count + 1; i++)
+        {
+            Console.WriteLine($"{i}- {jugadas[i - 1]}");
+        }
+        int idJugada = PedirNumeroValido(1, jugadas.Count);
+        
+        return idJugada - 1;
     }
 
-    public int PedirJugada(int minValue, int maxValue)
+    public int PedirCarta(int minValue, int maxValue)
     {
         int nrCartaEscogida = PedirNumeroValido(minValue, maxValue);
         return nrCartaEscogida;
@@ -63,36 +71,8 @@ public class Vista
 
         return numero;
     }
-
-    public int PedirJugada(List<Jugada> jugadas)
-    {
-        Console.WriteLine($"Hay {jugadas.Count} jugadas en la mesa:");
-        for (int i = 1; i < jugadas.Count + 1; i++)
-        {
-            Console.WriteLine($"{i}- {jugadas[i - 1].ToString()}");
-        }
-
-        int idJugada = PedirNumeroValido(1, jugadas.Count);
-        return idJugada - 1;
-    }
-
-
-    public void JugadorSeLlevaLasCartas(Jugador jugador ,Jugada jugada)
-    {
-        // Console.WriteLine($"Jugador {jugador._id} se lleva las siguientes cartas: {MostrarEscoba(jugada.Escoba())}");
-        Console.WriteLine($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada.ToString()}");
-        if (jugada.EsEscoba)
-        {
-            MostrarEscoba(jugador);
-        }
-    }
-
-    public void MostrarEscoba(Jugador jugador)
-    {
-        Console.WriteLine($"ESCOBA!************************************************** JUGADOR {jugador.Id}");
-    }
-
-    public void NoHayEscoba()
+    
+    public void NoHayJugadaDisponible()
     {
         Console.WriteLine($"Lamentablemente, no existe una combinación de cartas en la mesa que, sumada a la carta bajada, suman 15.");
     }
@@ -111,6 +91,20 @@ public class Vista
         Console.WriteLine($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
         Console.WriteLine($"Este es el jugador {jugador.Id}!");
         JugadorSeLlevaLasCartas(jugador, jugada);
+    }
+    
+    public void JugadorSeLlevaLasCartas(Jugador jugador ,Jugada jugada)
+    {
+        Console.WriteLine($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada}");
+        if (jugada.EsEscoba)
+        {
+            MostrarEscoba(jugador);
+        }
+    }
+    
+    public void MostrarEscoba(Jugador jugador)
+    {
+        Console.WriteLine($"ESCOBA!************************************************** JUGADOR {jugador.Id}");
     }
 
     public void CartasGanadasEnEstaRonda(Jugadores jugadores)
@@ -153,9 +147,8 @@ public class Vista
         Console.WriteLine($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
     }
 
-    public static void MostrarJugada(Jugador jugador, Jugada jugada)
+    public static void MostrarJugada(Jugada jugada)
     {
-        // Console.WriteLine($"    Jugador {jugador._id}:");
         Console.WriteLine($"{jugada}. Es Escoba: {jugada.EsEscoba}");
     }
 

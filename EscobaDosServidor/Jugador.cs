@@ -64,7 +64,7 @@ public class Jugador
     {
         foreach (var jugada in _listaDeJugadas)
         {
-            Vista.MostrarJugada(this, jugada);
+            Vista.MostrarJugada(jugada);
         }
     }
 

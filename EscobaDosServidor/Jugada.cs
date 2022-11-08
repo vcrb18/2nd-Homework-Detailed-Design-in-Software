@@ -54,18 +54,10 @@ public class Jugada
         bool tieneSieteDeOro = false;
         foreach (var carta in _cartasQueFormanJugada)
         {
-            if (EsSieteDeOro(carta)) { tieneSieteDeOro = true; }
+            if (carta.EsSieteDeOro()) { tieneSieteDeOro = true; }
         }
 
         return tieneSieteDeOro;
-    }
-
-    private bool EsSieteDeOro(Carta carta)
-    {
-        bool esSieteDeOro = false;
-        if (carta.Pinta == "Oro" && carta.Valor == "7") { esSieteDeOro = true; }
-
-        return esSieteDeOro;
     }
 
     public int NumeroDeSietesEnJugada()
@@ -73,22 +65,10 @@ public class Jugada
         int numeroDeSietes = 0;
         foreach (var carta in _cartasQueFormanJugada)
         {
-            if (ValorCartaEsSiete(carta)) { numeroDeSietes += 1; }
+            if (carta.ValorCartaEsSiete()) { numeroDeSietes += 1; }
         }
         
         return numeroDeSietes;
-    }
-
-    private bool ValorCartaEsSiete(Carta carta)
-    {
-        if (carta.Valor == "7")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public int NumeroDeOrosEnJugada()
@@ -96,23 +76,10 @@ public class Jugada
         int numeroDeOros = 0;
         foreach (var carta in _cartasQueFormanJugada)
         {
-            if (PintaCartaEsOro(carta)) { numeroDeOros += 1; }
+            if (carta.PintaCartaEsOro()) { numeroDeOros += 1; }
         }
 
         return numeroDeOros;
     }
-    
-    private bool PintaCartaEsOro(Carta carta)
-    {
-        if (carta.Pinta == "Oro")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
     
 }

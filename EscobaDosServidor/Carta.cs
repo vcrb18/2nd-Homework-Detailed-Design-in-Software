@@ -48,5 +48,37 @@ public class Carta
         };
         return diccionarioDeValoresCarta;
     }
+
+    public bool EsSieteDeOro()
+    {
+        bool esSieteDeOro = false;
+        if (_pinta == "Oro" && _valor == "7") { esSieteDeOro = true; }
+
+        return esSieteDeOro;
+    }
+    
+    public bool ValorCartaEsSiete()
+    {
+        if (_valor == "7")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool PintaCartaEsOro()
+    {
+        if (_pinta == "Oro")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
 }

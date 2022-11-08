@@ -9,8 +9,15 @@ public class CartasEnMesa
     {
         for (int i = 0; i < NumeroCartasMesaInicialmente; i++)
         {
-            _cartasEnMesa.Add(mazoCartas.SacarCartaDeArriba());
+            ColocarCartaSuperiorMazoEnMesa(mazoCartas);
         }
+    }
+
+    private void ColocarCartaSuperiorMazoEnMesa(MazoCartas mazoCartas)
+    {
+        Carta cartaSuperiorMazo = mazoCartas.CartaSuperiorMazo();
+        mazoCartas.SacarCartaSuperiorMazo();
+        AgregarCarta(cartaSuperiorMazo);
     }
 
     public List<Carta> CartasDeLaMesa

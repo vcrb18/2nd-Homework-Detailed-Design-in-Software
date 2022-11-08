@@ -32,7 +32,7 @@ public class Juego
 
     private void CrearJugadores() => _jugadores = new Jugadores(NumJugadores);
     private void CrearMazo() => _mazoCartas = new MazoCartas();
-    private void BarajarMazo() => _mazoCartas.BarajarCartas();
+    private void BarajarMazo() => _mazoCartas.AlgoritmoParaBarajarCartas();
     private void RepartirCartas() => _jugadores.RepartirCartas(_mazoCartas);
     private void PonerMesa() => _cartasEnMesa = new CartasEnMesa(_mazoCartas);
 
@@ -257,7 +257,9 @@ public class Juego
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
         _vista.MostrarQuienJuega(jugador);
         _vista.MostrarMesaActual(_cartasEnMesa);
-        Carta cartaAJugar = _vista.MostrarManoJugador(jugador);
+        _vista.MostrarManoJugador(jugador);
+        int idJugada = _vista.PedirCarta(1, jugador.Mano.Count);
+        Carta cartaAJugar = jugador.Mano[idJugada - 1];
         ResetearJugadas();
         JugarTurnoJugador(cartaAJugar);
         
@@ -271,7 +273,7 @@ public class Juego
         {
             // No hay escoba
             BajarCarta(cartaAJugar);
-            _vista.NoHayEscoba();
+            _vista.NoHayJugadaDisponible();
         }
         else if (_listaDeJugadasPosibles.Count == 1)
         {

@@ -20,7 +20,7 @@ public class MazoCartasTests
         MazoCartas mazoCartas = new MazoCartas();
         List<Carta> cartasSinBarajar = CreaListaCartasMazo(mazoCartas);
         
-        mazoCartas.BarajarCartas();
+        mazoCartas.AlgoritmoParaBarajarCartas();
         List<Carta> cartasDelMazoBarajadas = mazoCartas.Cartas;
 
         Assert.NotEqual(cartasSinBarajar, cartasDelMazoBarajadas);
@@ -62,7 +62,7 @@ public class MazoCartasTests
         int cartasEnElMazo = mazoCartas.CuantasCartasQuedan();
         for (int i = 0; i < cartasEnElMazo; i++)
         {
-            mazoCartas.SacarCartaDeArriba();
+            mazoCartas.SacarCartaSuperiorMazo();
         }
 
         bool seAcabaronLasCartas = mazoCartas.SeAcabaronLasCartas();
