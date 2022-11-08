@@ -78,14 +78,14 @@ public class JuegoTests
         Assert.Equal(idJugadorRepartidor, nuevoIdJugadorRepartidor);
     }
     
-    [Fact]
-    public void AlgunJugadorGanoElJuego_InicialmenteNadieHaGanado()
-    {
-        Juego juego = Juego.Crear();
-        bool algunJugadorGanoElJuego = juego.AlgunJugadorGanoElJuego();
-        
-        Assert.False(algunJugadorGanoElJuego);
-    }
+    // [Fact]
+    // public void AlgunJugadorGanoElJuego_InicialmenteNadieHaGanado()
+    // {
+    //     Juego juego = Juego.Crear();
+    //     bool algunJugadorGanoElJuego = juego.AlgunJugadorGanoElJuego();
+    //     
+    //     Assert.False(algunJugadorGanoElJuego);
+    // }
     
     
 }

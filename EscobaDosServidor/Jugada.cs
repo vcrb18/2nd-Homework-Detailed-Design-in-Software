@@ -49,6 +49,18 @@ public class Jugada
         }
     }
     
+    public bool HayCuatroCartasEnJugada()
+    {
+        if (_cartasQueFormanJugada.Count == 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     public bool TieneSieteDeOro()
     {
         bool tieneSieteDeOro = false;

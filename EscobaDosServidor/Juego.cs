@@ -3,8 +3,6 @@ namespace Servidor;
 public class Juego
 {
     private const int NumJugadores = 2;
-    // private const int NumCartasMesaInicial = 4;
-
     private static int _target = 15;
     private static Jugadores _jugadores;
     private static int _idJugadorTurno = 0;
@@ -55,7 +53,7 @@ public class Juego
         while (!EsFinJuego())
         {
             
-            ChequeaCasoBorde();
+            RevisarSiCartasMesaInicialesSumanQuince();
             _vista.MostrarInfoInicial(_idJugadorRepartidor, _idJugadorPartidor);
             while (!EsFinMazoYManos())
             {
@@ -63,7 +61,6 @@ public class Juego
                 JugarTurno();
                 CambiarTurno();
             }
-            // break;
             if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
             {
                 NuevoJuego();
@@ -71,13 +68,12 @@ public class Juego
         }
     }
 
-    private void ChequeaCasoBorde()
+    private void RevisarSiCartasMesaInicialesSumanQuince()
     {
         sum_up_casoBorde(_cartasEnMesa.CartasDeLaMesa, _target);
         if (_listaDeJugadasPosibles.Count == 1)
         {
-            // Necesito que sean las 4 cartas
-            if (HayCUatroCartasEnJugada(_listaDeJugadasPosibles[0]))
+            if ((_listaDeJugadasPosibles[0].HayCuatroCartasEnJugada()))
             {
                 JugarJugadaCasoBorde(_listaDeJugadasPosibles[0]);
                 ResetearJugadas();
@@ -85,31 +81,16 @@ public class Juego
         }
         else if (_listaDeJugadasPosibles.Count == 2)
         {
-            // Necesito que cada jugada sean 2 cartas
             if (AmbasJugadasSonDeDosCartas(_listaDeJugadasPosibles))
             {
                 JugarJugadaCasoBorde(_listaDeJugadasPosibles[0]);
                 JugarJugadaCasoBorde(_listaDeJugadasPosibles[1]);
                 ResetearJugadas();
-
             }
         }
-
     }
     
-    // Siguientes tres metodos pasarlos a Jugada.cs
-    private bool HayCUatroCartasEnJugada(Jugada jugada)
-    {
-        if (jugada.NumeroDeCartasDeJugada == 4)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
+    // Siguientes dos metodos pasarlos a Jugada.cs
     private bool AmbasJugadasSonDeDosCartas(List<Jugada> jugadas)
     {
         if ((jugadas[0].HayDosCartasEnJugada()) && (jugadas[1].HayDosCartasEnJugada()))
@@ -133,38 +114,20 @@ public class Juego
         _vista.MostrarEscoba(jugador);
     }
 
-    // Arreglar funcion
     public bool EsFinJuego()
     {
+        bool esFinJuego = false;
         if (AlgunJugadorGanoElJuego())
         {
+            esFinJuego = true;
             _vista.FinalDePartida();
-            List<Jugador> listaJugadoresGanadores = _jugadores.GanadorOGanadoresDelJuego();
-            if (listaJugadoresGanadores.Count == 1)
-            {
-                int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaJugadoresGanadores);
-                Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
-                _vista.GanaUnJugador(jugadorGanador);
-            }
-            else if (listaJugadoresGanadores.Count == 2)
-            {
-                int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaJugadoresGanadores);
-                Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
-                
-                int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaJugadoresGanadores);
-                Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
-                
-                _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
-            }
-            return true;
+            RevisaQuienGanoJuego();
         }
-        else
-        {
-            return false;
-        }
-    }
 
-    public bool AlgunJugadorGanoElJuego()
+        return esFinJuego;
+    }
+    
+    private bool AlgunJugadorGanoElJuego()
     {
         Jugador jugadorUno = _jugadores.ObtenerJugador(0);
         Jugador jugadorDos = _jugadores.ObtenerJugador(1);
@@ -178,34 +141,47 @@ public class Juego
         }
     }
 
+    private void RevisaQuienGanoJuego()
+    {
+        List<Jugador> listaConGanadorOGanadores = _jugadores.GanadorOGanadoresDelJuego();
+        if (listaConGanadorOGanadores.Count == 1) { GanoUnJugador(listaConGanadorOGanadores); }
+        else if (listaConGanadorOGanadores.Count == 2) { HuboUnEmpate(listaConGanadorOGanadores); }
+    }
 
+    private void GanoUnJugador(List<Jugador> listaConJugadorGanador)
+    {
+        int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaConJugadorGanador);
+        Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
+        _vista.GanaUnJugador(jugadorGanador);
+    }
+
+    private void HuboUnEmpate(List<Jugador> listaConJugadoresGanadores)
+    {
+        int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaConJugadoresGanadores);
+        Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
+        int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaConJugadoresGanadores);
+        Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
+        _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
+    }
+    
     public bool EsFinMazoYManos()
     {
-        if (_mazoCartas.SeAcabaronLasCartas())
+        bool esFinMazoYManos = false;
+        if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
         {
-            if (_jugadores.AmbosJugadoresTienenManosVacias())
-            {
-                // Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(_idUltimoJugadorEnLlevarseLasCartas);
-                // Console.WriteLine($"Jugadas pre Ultima jugada jugador {jugadorEnLlevarseLasCartas._id}: {jugadorEnLlevarseLasCartas.NumeroDeJugadas()}");
-                // Console.WriteLine($"VEMOS LA ULTIMA JUGADA: {jugadorEnLlevarseLasCartas.ListaDeJugadas[jugadorEnLlevarseLasCartas.ListaDeJugadas.Count - 1]}");
-                // Console.WriteLine($"Jugadas post Ultima jugada jugador {jugadorEnLlevarseLasCartas._id}: {jugadorEnLlevarseLasCartas.NumeroDeJugadas()}");
-                // Console.WriteLine($"VEMOS LA ULTIMA JUGADA: {jugadorEnLlevarseLasCartas.ListaDeJugadas[jugadorEnLlevarseLasCartas.ListaDeJugadas.Count - 1]}");
-                UltimaJugadaDelMazo();
-                _vista.CartasGanadasEnEstaRonda(_jugadores);
-                _jugadores.CalcularPuntajes();
-                _vista.TotalPuntosGanadosJugadores(_jugadores);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            esFinMazoYManos = true;
+            UltimaJugadaDelMazo();
+            CalculaPuntos();
+        }
 
-        }
-        else
-        {
-            return false;
-        }
+        return esFinMazoYManos;
+    }
+
+    private void CalculaPuntos()
+    {
+        _jugadores.CalcularPuntajes();
+        _vista.CartasGanadasEnEstaRonda(_jugadores);
+        _vista.TotalPuntosGanadosJugadores(_jugadores);
     }
 
     public void NuevoJuego()
@@ -262,7 +238,6 @@ public class Juego
         Carta cartaAJugar = jugador.Mano[idJugada - 1];
         ResetearJugadas();
         JugarTurnoJugador(cartaAJugar);
-        
     }
 
 
@@ -302,31 +277,16 @@ public class Juego
         jugador.AgregarJugada(jugada);
         _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
-        // _vista.MostrarEscoba(jugador);
     }
 
     private void CalcularJugadas(Carta cartaAJugar)
     {
         List<Jugada> jugadasPosibles = new List<Jugada>();
         sum_up(CartasQuePuedenSumarQuince(cartaAJugar), _target, cartaAJugar);
-        
-        // List<Carta> cartasQuePuedenSumarQuince = CartasQuePuedenSumarQuince(cartaAJugar);
-        // List<int> C = new List<int>();
-        // C.Add(3);
-        // C.Add(2);
-        // C.Add(5);
-        // C.Add(7);
-        // C.Add(8);
-        // // sum_up(C, target);
-        // // OBTENER CARTAS DE LAS LISTAS DE INTS QUE SUMAN 15
-        // // CREAR JUGADAS
-        
-        // return jugadasPosibles;
     }
 
     private List<Carta> CartasQuePuedenSumarQuince(Carta cartaAJugar)
     {
-        // int valorCartaAJugar = Convert.ToInt32(cartaAJugar.Valor);
         List<Carta> cartasQuePuedenSumarQuince = new List<Carta>();
         cartasQuePuedenSumarQuince.Add(cartaAJugar);
         foreach (var carta in _cartasEnMesa.CartasDeLaMesa)
@@ -347,9 +307,6 @@ public class Juego
         foreach (Carta x in partial) s += x.ConvierteStringValorAInt();
 
         if (s == target)
-            // Console.WriteLine(partial.ToArray());
-            // Console.WriteLine("sum(" + string.Join(",", partial.ToArray()) + ")=" + target);
-            // Console.WriteLine("sum(" + string.Join(",", partial) + ")=" + target);
             GuardaJugada(partial);
 
         if (s >= target)
@@ -378,21 +335,12 @@ public class Juego
         foreach (Carta x in partial) s += x.ConvierteStringValorAInt();
 
         if (s == target)
-            // Console.WriteLine(partial.ToArray());
-            // Console.WriteLine("sum(" + string.Join(",", partial.ToArray()) + ")=" + target);
-            // Console.WriteLine("sum(" + string.Join(",", partial) + ")=" + target);
-
             if (partial.Contains(cartaObligatoria))
             {
-                // Console.WriteLine($"De antes habian {_listaDeJugadasPosibles.Count} Jugadas");
-                // Console.WriteLine($"Jugada a guardar");
-                // Console.WriteLine("sum(" + string.Join(",", partial) + ")=" + target);
                 GuardaJugada(partial);
             }
-
         if (s >= target)
             return;
-
         for (int i = 0; i < numbers.Count; i++)
         {
             List<Carta> remaining = new List<Carta>();
@@ -464,8 +412,5 @@ public class Juego
     {
         _idUltimoJugadorEnLlevarseLasCartas = jugador.Id;
     }
-    
-    
-  
     
 }
