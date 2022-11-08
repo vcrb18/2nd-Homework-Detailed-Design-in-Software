@@ -5,7 +5,7 @@ public class Juego
     private const int NumJugadores = 2;
     private static int _target = 15;
     private static Jugadores _jugadores;
-    private static int _idJugadorTurno = 0;
+    private static int _idJugadorTurno = 1;
     private static int _idUltimoJugadorEnLlevarseLasCartas;
     private static int _idJugadorRepartidor = 0;
     private int _idJugadorPartidor = 1;
