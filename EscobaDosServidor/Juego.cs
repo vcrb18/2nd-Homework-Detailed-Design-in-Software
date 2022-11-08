@@ -81,50 +81,17 @@ public class Juego
     {
         Jugador jugadorUno = _jugadores.ObtenerJugador(0);
         Jugador jugadorDos = _jugadores.ObtenerJugador(1);
-        if (jugadorUno.Puntaje >= _target || jugadorDos.Puntaje >= _target)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        bool algunJugadorAlcanzoLosQuincePuntos = false;
+        if (jugadorUno.Puntaje >= _target || jugadorDos.Puntaje >= _target) { algunJugadorAlcanzoLosQuincePuntos = true; }
+
+        return algunJugadorAlcanzoLosQuincePuntos;
     }
     
-    private void RevisaQuienGanoJuego()
-    {
-        List<Jugador> listaConGanadorOGanadores = _jugadores.GanadorOGanadoresDelJuego();
-        if (listaConGanadorOGanadores.Count == 1) { GanoUnJugador(listaConGanadorOGanadores); }
-        else if (listaConGanadorOGanadores.Count == 2) { HuboUnEmpate(listaConGanadorOGanadores); }
-    }
-    
-    private void GanoUnJugador(List<Jugador> listaConJugadorGanador)
-    {
-        int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaConJugadorGanador);
-        Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
-        _vista.GanaUnJugador(jugadorGanador);
-    }
-
-    private void HuboUnEmpate(List<Jugador> listaConJugadoresGanadores)
-    {
-        int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaConJugadoresGanadores);
-        Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
-        int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaConJugadoresGanadores);
-        Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
-        _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
-    }
-
     private void RevisarSiCartasMesaInicialesSumanQuince()
     {
         CalculaQueCartasSumanQuince(_cartasEnMesa.CartasDeLaMesa, null, false);
-        if (CuatroCartasMesaFormanUnaJugada())
-        {
-            JugarJugadaComienzoDeMano(_listaDeJugadasPosibles[0]);
-        }
-        else if (CuatroCartasMesaFormanDosJugadasDeDosCartas())
-        {
-            SeJueganDosJugadasComienzoDeMano();
-        }
+        if (CuatroCartasMesaFormanUnaJugada()) { JugarJugadaAlComienzoDeMano(_listaDeJugadasPosibles[0]); }
+        else if (CuatroCartasMesaFormanDosJugadasDeDosCartas()) { SeJueganDosJugadasAlComienzoDeMano(); }
         ResetearJugadas();
     }
 
@@ -140,21 +107,26 @@ public class Juego
         }
     }
     
-    private void JugarJugadaComienzoDeMano(Jugada jugada)
+    private void JugarJugadaAlComienzoDeMano(Jugada jugada)
     {
         _vista.HayUnaODosEscobasAlComienzo();
         jugada.TransformaJugadaAEscobaEnCasoInicial();
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorRepartidor);
-        AgregarJugada(jugada, jugador);
+        AgregarJugadaAlJugador(jugada, jugador);
 
     }
     
-    private void AgregarJugada(Jugada jugada, Jugador jugador)
+    private void AgregarJugadaAlJugador(Jugada jugada, Jugador jugador)
     {
         GuardarUltimoJugadorEnLlevarseCartas(jugador);
         jugador.AgregarJugada(jugada);
         _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
+    }
+    
+    public static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)
+    {
+        _idUltimoJugadorEnLlevarseLasCartas = jugador.Id;
     }
     
     private bool CuatroCartasMesaFormanDosJugadasDeDosCartas()
@@ -181,23 +153,25 @@ public class Juego
         }
     }
     
-    private void SeJueganDosJugadasComienzoDeMano()
+    private void SeJueganDosJugadasAlComienzoDeMano()
     {
         foreach (var jugada in _listaDeJugadasPosibles)
         {
-            JugarJugadaComienzoDeMano(jugada);
+            JugarJugadaAlComienzoDeMano(jugada);
         }
     }
     
-    public bool EsFinMazoYManos()
+    private void ResetearJugadas()
+    {
+        _listaDeJugadasPosibles = new List<Jugada>();
+    }
+    
+    private bool EsFinMazoYManos()
     {
         bool esFinMazoYManos = false;
         if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
         {
             esFinMazoYManos = true;
-            // FinalRonda();
-            // UltimaJugadaDelMazo();
-            // CalculaPuntos();
         }
 
         return esFinMazoYManos;
@@ -226,9 +200,7 @@ public class Juego
         _vista.CartasGanadasEnEstaRonda(_jugadores);
         _vista.TotalPuntosGanadosJugadores(_jugadores);
     }
-
-
-
+    
     public void CambiarRepartidorYJugador()
     {
         CambiarRepartidor();
@@ -286,12 +258,7 @@ public class Juego
             _vista.SeVuelvenARepartirCartas();
         }
     }
-
-    private void ResetearJugadas()
-    {
-        _listaDeJugadasPosibles = new List<Jugada>();
-    }
-
+    
     private void JugarTurnoJugador(Carta cartaAJugar)
     {
         CalcularJugadas(cartaAJugar);
@@ -348,7 +315,6 @@ public class Juego
         }
     }
 
-    
     private void GuardaJugada(List<Carta> cartasQueSumanQuince)
     {
         bool laJugadaEsUnaEscoba = _cartasEnMesa.LaJugadaEsUnaEscoba(cartasQueSumanQuince);
@@ -421,13 +387,10 @@ public class Juego
     private void JugarJugada(Jugada jugada)
     {
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-        AgregarJugada(jugada, jugador);
+        AgregarJugadaAlJugador(jugada, jugador);
     }
     
-    public static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)
-    {
-        _idUltimoJugadorEnLlevarseLasCartas = jugador.Id;
-    }
+
     
     public static void CambiarTurno()
     {
@@ -450,5 +413,29 @@ public class Juego
         RepartirCartas();
         PonerMesa();
     }
+    //////////////////////////////////////////////////////////////////
 
+    
+    private void RevisaQuienGanoJuego()
+    {
+        List<Jugador> listaConGanadorOGanadores = _jugadores.GanadorOGanadoresDelJuego();
+        if (listaConGanadorOGanadores.Count == 1) { GanoUnJugador(listaConGanadorOGanadores); }
+        else if (listaConGanadorOGanadores.Count == 2) { HuboUnEmpate(listaConGanadorOGanadores); }
+    }
+    
+    private void GanoUnJugador(List<Jugador> listaConJugadorGanador)
+    {
+        int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaConJugadorGanador);
+        Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
+        _vista.GanaUnJugador(jugadorGanador);
+    }
+
+    private void HuboUnEmpate(List<Jugador> listaConJugadoresGanadores)
+    {
+        int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaConJugadoresGanadores);
+        Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
+        int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaConJugadoresGanadores);
+        Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
+        _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
+    }
 }
