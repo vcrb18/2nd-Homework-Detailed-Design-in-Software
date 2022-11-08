@@ -59,7 +59,6 @@ public class Juego
             {
                 Console.WriteLine(_mazoCartas.CuantasCartasQuedan());
                 JugarTurno();
-                CambiarTurno();
             }
             if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
             {
@@ -120,68 +119,59 @@ public class Juego
 
     private void RevisarSiCartasMesaInicialesSumanQuince()
     {
-        sum_up_casoBorde(_cartasEnMesa.CartasDeLaMesa, _target);
-        if (_listaDeJugadasPosibles.Count == 1)
+        CalculaQueCartasSumanQuince(_cartasEnMesa.CartasDeLaMesa, null, false);
+        if (CuatroCartasMesaFormanUnaJugada())
         {
-            if ((_listaDeJugadasPosibles[0].HayCuatroCartasEnJugada()))
-            {
-                JugarJugadaCasoBorde(_listaDeJugadasPosibles[0]);
-                ResetearJugadas();
-            }
+            JugarJugadaComienzoDeMano(_listaDeJugadasPosibles[0]);
         }
-        else if (_listaDeJugadasPosibles.Count == 2)
+        else if (CuatroCartasMesaFormanDosJugadasDeDosCartas())
         {
-            if (AmbasJugadasSonDeDosCartas(_listaDeJugadasPosibles))
-            {
-                JugarJugadaCasoBorde(_listaDeJugadasPosibles[0]);
-                JugarJugadaCasoBorde(_listaDeJugadasPosibles[1]);
-                ResetearJugadas();
-            }
+            SeJueganDosJugadasComienzoDeMano();
+        }
+        ResetearJugadas();
+    }
+
+    private bool CuatroCartasMesaFormanUnaJugada()
+    {
+        if (_listaDeJugadasPosibles.Count == 1 && _listaDeJugadasPosibles[0].HayCuatroCartasEnJugada())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     
-    
-    private void sum_up_casoBorde(List<Carta> numbers, int target)
+    private void JugarJugadaComienzoDeMano(Jugada jugada)
     {
-        sum_up_recursive_casoBorde(numbers, target, new List<Carta>());
-    }
-
-    private void sum_up_recursive_casoBorde(List<Carta> numbers, int target, List<Carta> partial)
-    {
-        int s = 0;
-        foreach (Carta x in partial) s += x.ConvierteStringValorAInt();
-
-        if (s == target)
-            GuardaJugada(partial);
-
-        if (s >= target)
-            return;
-
-        for (int i = 0; i < numbers.Count; i++)
-        {
-            List<Carta> remaining = new List<Carta>();
-            Carta n = numbers[i];
-            for (int j = i + 1; j < numbers.Count; j++) remaining.Add(numbers[j]);
-
-            List<Carta> partial_rec = new List<Carta>(partial);
-            partial_rec.Add(n);
-            sum_up_recursive_casoBorde(remaining, target, partial_rec);
-        }
-    }
-
-    private void JugarJugadaCasoBorde(Jugada jugada)
-    {
-        _vista.HayUnaODosEscobasAlComienzo();   
+        _vista.HayUnaODosEscobasAlComienzo();
+        jugada.TransformaJugadaAEscobaEnCasoInicial();
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorRepartidor);
+        AgregarJugada(jugada, jugador);
+
+    }
+    
+    private void AgregarJugada(Jugada jugada, Jugador jugador)
+    {
         GuardarUltimoJugadorEnLlevarseCartas(jugador);
         jugador.AgregarJugada(jugada);
         _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
-        _vista.MostrarEscoba(jugador);
     }
     
+    private bool CuatroCartasMesaFormanDosJugadasDeDosCartas()
+    {
+        if (_listaDeJugadasPosibles.Count == 2 && AmbasJugadasSonDeDosCartas(_listaDeJugadasPosibles))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
-    // Siguientes dos metodos pasarlos a Jugada.cs
     private bool AmbasJugadasSonDeDosCartas(List<Jugada> jugadas)
     {
         if ((jugadas[0].HayDosCartasEnJugada()) && (jugadas[1].HayDosCartasEnJugada()))
@@ -194,6 +184,13 @@ public class Juego
         }
     }
     
+    private void SeJueganDosJugadasComienzoDeMano()
+    {
+        foreach (var jugada in _listaDeJugadasPosibles)
+        {
+            JugarJugadaComienzoDeMano(jugada);
+        }
+    }
     
     public bool EsFinMazoYManos()
     {
@@ -212,9 +209,7 @@ public class Juego
     {
         Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(_idUltimoJugadorEnLlevarseLasCartas);
         List<Carta> cartasMesa = _cartasEnMesa.CartasDeLaMesa;
-        
         Jugada cartasSobrantes = new Jugada(cartasMesa, false);
-
         jugadorEnLlevarseLasCartas.AgregarJugada(cartasSobrantes);
         _vista.SeLlevaLasUltimasCartas(jugadorEnLlevarseLasCartas, cartasSobrantes);
         _cartasEnMesa.SacarCartasDeLaMesa(cartasSobrantes.CartasQueFormanJugada);
@@ -275,6 +270,7 @@ public class Juego
         Carta cartaAJugar = jugador.Mano[idJugada - 1];
         ResetearJugadas();
         JugarTurnoJugador(cartaAJugar);
+        CambiarTurno();
     }
     
     private void SiNoTienenCartasSeReparte()
@@ -300,7 +296,7 @@ public class Juego
     
     private void CalcularJugadas(Carta cartaAJugar)
     {
-        CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar);
+        CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar, true);
     }
     
     private List<Carta> CartasQuePuedenSumarQuince(Carta cartaAJugar)
@@ -314,37 +310,39 @@ public class Juego
         return cartasQuePuedenSumarQuince;
     }
     
-    private void CalculaQueCartasSumanQuince(List<Carta> cartasQuePuedenSumarQuince, Carta cartaQueDebePertenecerAJugada)
+    private void CalculaQueCartasSumanQuince(List<Carta> cartasQuePuedenSumarQuince, Carta cartaQueDebePertenecerAJugada, bool debeIncluirCarta)
     {
-        CalculaQueCartasSumanQuinceRecursivo(cartasQuePuedenSumarQuince,new List<Carta>(), cartaQueDebePertenecerAJugada);
+        CalculaQueCartasSumanQuinceRecursivo(cartasQuePuedenSumarQuince,new List<Carta>(), cartaQueDebePertenecerAJugada, debeIncluirCarta);
     }
 
-    private void CalculaQueCartasSumanQuinceRecursivo(List<Carta> numbers, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria)
+    private void CalculaQueCartasSumanQuinceRecursivo(List<Carta> numbers, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria, bool debeIncluirCarta)
     {
         int sumaValoresCarta = 0;
         foreach (Carta carta in cartasCandidatasParaSumarQuince) sumaValoresCarta += carta.ConvierteStringValorAInt();
-        GuardaJugadaSiSeCumplenLasCondiciones(sumaValoresCarta, cartasCandidatasParaSumarQuince, cartaObligatoria);
+        GuardaJugadaSiSeCumplenLasCondiciones(sumaValoresCarta, cartasCandidatasParaSumarQuince, cartaObligatoria, debeIncluirCarta);
         if (sumaValoresCarta >= _target)
             return;
-        RealizaRecursionConCartasRestantes(numbers, cartasCandidatasParaSumarQuince, cartaObligatoria);
+        RealizaRecursionConCartasRestantes(numbers, cartasCandidatasParaSumarQuince, cartaObligatoria, debeIncluirCarta);
     }
 
-    private void GuardaJugadaSiSeCumplenLasCondiciones(int sumaValoresCarta, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria)
+    private void GuardaJugadaSiSeCumplenLasCondiciones(int sumaValoresCarta, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria, bool debeIncluirCarta)
     {
-        if (sumaValoresCarta == _target && cartasCandidatasParaSumarQuince.Contains(cartaObligatoria))
+        if (debeIncluirCarta)
         {
-            GuardaJugada(cartasCandidatasParaSumarQuince);
+            if (sumaValoresCarta == _target && cartasCandidatasParaSumarQuince.Contains(cartaObligatoria))
+            {
+                GuardaJugada(cartasCandidatasParaSumarQuince);
+            }
+        }
+        else
+        {
+            if (sumaValoresCarta == _target)
+            {
+                GuardaJugada(cartasCandidatasParaSumarQuince);
+            }
         }
     }
 
-    private void GuardaJugadaSiSumanQuinceCasoBorde(int sumaValoresCarta, List<Carta> cartasCandidatasParaSumarQuince)
-    {
-        if (sumaValoresCarta == _target)
-        {
-            GuardaJugada(cartasCandidatasParaSumarQuince);
-        }
-            
-    }
     
     private void GuardaJugada(List<Carta> cartasQueSumanQuince)
     {
@@ -353,7 +351,7 @@ public class Juego
         _listaDeJugadasPosibles.Add(jugada);
     }
 
-    private void RealizaRecursionConCartasRestantes(List<Carta> numbers, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria)
+    private void RealizaRecursionConCartasRestantes(List<Carta> numbers, List<Carta> cartasCandidatasParaSumarQuince, Carta cartaObligatoria, bool debeIncluirCarta)
     {
         for (int i = 0; i < numbers.Count; i++)
         {
@@ -363,7 +361,7 @@ public class Juego
 
             List<Carta> cartasCandidatasParaSumarQuinceRecursivo = new List<Carta>(cartasCandidatasParaSumarQuince);
             cartasCandidatasParaSumarQuinceRecursivo.Add(n);
-            CalculaQueCartasSumanQuinceRecursivo(cartasRestantes, cartasCandidatasParaSumarQuinceRecursivo, cartaObligatoria);
+            CalculaQueCartasSumanQuinceRecursivo(cartasRestantes, cartasCandidatasParaSumarQuinceRecursivo, cartaObligatoria, debeIncluirCarta);
         }
     }
     
@@ -418,10 +416,7 @@ public class Juego
     private void JugarJugada(Jugada jugada)
     {
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-        GuardarUltimoJugadorEnLlevarseCartas(jugador);
-        jugador.AgregarJugada(jugada);
-        _cartasEnMesa.SacarCartasDeLaMesa(jugada.CartasQueFormanJugada);
-        _vista.JugadorSeLlevaLasCartas(jugador, jugada);
+        AgregarJugada(jugada, jugador);
     }
     
     public static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)

@@ -93,5 +93,10 @@ public class Jugada
 
         return numeroDeOros;
     }
+
+    public void TransformaJugadaAEscobaEnCasoInicial()
+    {
+        _esEscoba = true;
+    }
     
 }
