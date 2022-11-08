@@ -61,21 +61,17 @@ public class Juego
                 JugarTurno();
             }
             FinalRonda();
-            // if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
-            // {
-            //     NuevoJuego();
-            // }
         }
+        RevisaQuienGanoJuego();
     }
     
-    public bool EsFinJuego()
+    private bool EsFinJuego()
     {
         bool esFinJuego = false;
         if (AlgunJugadorGanoElJuego())
         {
             esFinJuego = true;
             _vista.FinalDePartida();
-            RevisaQuienGanoJuego();
         }
 
         return esFinJuego;
