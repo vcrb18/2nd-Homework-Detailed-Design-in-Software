@@ -60,10 +60,11 @@ public class Juego
                 Console.WriteLine(_mazoCartas.CuantasCartasQuedan());
                 JugarTurno();
             }
-            if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
-            {
-                NuevoJuego();
-            }
+            FinalRonda();
+            // if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
+            // {
+            //     NuevoJuego();
+            // }
         }
     }
     
@@ -198,11 +199,19 @@ public class Juego
         if (_mazoCartas.SeAcabaronLasCartas() && _jugadores.AmbosJugadoresTienenManosVacias())
         {
             esFinMazoYManos = true;
-            UltimaJugadaDelMazo();
-            CalculaPuntos();
+            // FinalRonda();
+            // UltimaJugadaDelMazo();
+            // CalculaPuntos();
         }
 
         return esFinMazoYManos;
+    }
+
+    private void FinalRonda()
+    {
+        UltimaJugadaDelMazo();
+        CalculaPuntos();
+        NuevoJuego();
     }
     
     private static void UltimaJugadaDelMazo()
