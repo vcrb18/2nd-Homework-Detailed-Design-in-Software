@@ -2,13 +2,13 @@ namespace Servidor;
 
 public class ControladorDeJugadasEnJuego
 {
-    private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>(); //
-    private CartasEnMesa _cartasEnMesa; //RELLENAR
-    private int _target = 15; //
-    private Vista _vista; //RELLENAR
-    private Jugadores _jugadores; // RELLENAR
-    private int _idJugadorRepartidor = 0; //
-    private static int _idUltimoJugadorEnLlevarseLasCartas; //
+    private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>();
+    private CartasEnMesa _cartasEnMesa;
+    private int _target = 15;
+    private Vista _vista;
+    private Jugadores _jugadores;
+    private int _idJugadorRepartidor = 0;
+    private static int _idUltimoJugadorEnLlevarseLasCartas;
 
     public ControladorDeJugadasEnJuego(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores)
     {
@@ -179,9 +179,9 @@ public class ControladorDeJugadasEnJuego
 
         return idJugada;
     }
-    
-    public CartasEnMesa CartasDeLaMesa
+
+    public int IdUltimoJugadorEnLlevarseLasCartas
     {
-        get { return _cartasEnMesa; }
+        get { return _idUltimoJugadorEnLlevarseLasCartas;  }
     }
 }
