@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscobaDosServidor", "Escoba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscobaDos.Tests", "EscobaDos.Tests\EscobaDos.Tests.csproj", "{951CC26A-002A-4FB3-B12D-C969FA571CEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscobaDosCliente", "EscobaDosCliente\EscobaDosCliente.csproj", "{8914B7C9-EEFF-4050-8AD6-6D8C0F00F5B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{951CC26A-002A-4FB3-B12D-C969FA571CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{951CC26A-002A-4FB3-B12D-C969FA571CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{951CC26A-002A-4FB3-B12D-C969FA571CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8914B7C9-EEFF-4050-8AD6-6D8C0F00F5B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8914B7C9-EEFF-4050-8AD6-6D8C0F00F5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8914B7C9-EEFF-4050-8AD6-6D8C0F00F5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8914B7C9-EEFF-4050-8AD6-6D8C0F00F5B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

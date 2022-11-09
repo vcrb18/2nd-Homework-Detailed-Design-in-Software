@@ -1,0 +1,15 @@
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\bin\Debug\net6.0\EscobaDosCliente.exe
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\bin\Debug\net6.0\EscobaDosCliente.deps.json
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\bin\Debug\net6.0\EscobaDosCliente.runtimeconfig.json
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\bin\Debug\net6.0\EscobaDosCliente.dll
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\bin\Debug\net6.0\EscobaDosCliente.pdb
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.csproj.AssemblyReference.cache
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.AssemblyInfoInputs.cache
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.AssemblyInfo.cs
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.csproj.CoreCompileInputs.cache
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.dll
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\refint\EscobaDosCliente.dll
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.pdb
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\EscobaDosCliente.genruntimeconfig.cache
+C:\Users\vicru\Documents\2022-02\Diseño_detallado\Tarea2\2nd-Homework-Detailed-Design-in-Software\EscobaDosCliente\obj\Debug\net6.0\ref\EscobaDosCliente.dll
