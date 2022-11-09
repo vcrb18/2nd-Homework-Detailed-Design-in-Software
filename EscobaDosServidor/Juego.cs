@@ -41,10 +41,6 @@ public class Juego
         }
     }
     
-    // public static Juego Crear() => new Juego(new VistaConsola());
-    
-    // public static Juego Crear() => new Juego(new VistaSocket());
-
     public static Juego CrearConJugadorAleatorio() => new Juego(new VistaJugadorAleatorio());
 
     private void CrearJugadores() => _jugadores = new Jugadores(NumJugadores);
@@ -252,9 +248,6 @@ public class Juego
         }
     }
     
-    
-    // Creo que aca esta la separacion del controlador
-    
     private void JugarTurno()
     {
         SiNoTienenCartasSeReparte();
@@ -435,8 +428,6 @@ public class Juego
         RepartirCartas();
         PonerMesa();
     }
-    //////////////////////////////////////////////////////////////////
-
     
     private void RevisaQuienGanoJuego()
     {
