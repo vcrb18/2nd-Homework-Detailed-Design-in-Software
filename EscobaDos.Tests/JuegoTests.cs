@@ -4,18 +4,18 @@ namespace EscobaDos.Tests;
 
 public class JuegoTests
 {
-    [Fact]
-    public void Jugar_DebeLograrCompletarUnJuegoSinCaerse()
-    {
-        // Arrange
-        Juego juego = Juego.CrearConJugadorAleatorio();
-        
-        // Act
-        juego.Jugar();
-        
-        // Assert
-    
-    }
+    // [Fact]
+    // public void Jugar_DebeLograrCompletarUnJuegoSinCaerse()
+    // {
+    //     // Arrange
+    //     Juego juego = Juego.CrearConJugadorAleatorio();
+    //     
+    //     // Act
+    //     juego.Jugar();
+    //     
+    //     // Assert
+    //
+    // }
 
     [Fact]
     public void CambiarTurno_CambiaElIdJugadorTurno()

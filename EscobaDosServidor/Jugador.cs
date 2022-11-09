@@ -60,13 +60,14 @@ public class Jugador
         }
     }
 
-    public void MostrarCartasGanadas()
-    {
-        foreach (var jugada in _listaDeJugadas)
-        {
-            Vista.MostrarJugada(jugada);
-        }
-    }
+    // public void MostrarCartasGanadas()
+    // {
+    //     foreach (var jugada in _listaDeJugadas)
+    //     {
+    //         
+    //         Vista.MostrarJugada(jugada);
+    //     }
+    // }
 
     public void CalcularPuntaje()
     {

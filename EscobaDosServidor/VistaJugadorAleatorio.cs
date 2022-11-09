@@ -1,6 +1,6 @@
 namespace Servidor;
 
-public class VistaJugadorAleatorio : Vista
+public abstract class VistaJugadorAleatorio : Vista
 {
     private Random _rnd = new Random();
     

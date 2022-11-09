@@ -1,52 +1,58 @@
 namespace Servidor;
 
-public class Vista
+public abstract class Vista
 {
-    public void EscribeLineas()
+    protected abstract void Escribir(string mensaje);
+    protected abstract string LeerLinea();
+    public virtual void Cerrar() {}
+    
+    protected void EscribirLinea(string mensaje) => Escribir(mensaje + "\n");
+    // protected void EscribirLinea() => EscribirLinea("");
+    public void EscribeLineasSeparadoras()
     {
-        Console.WriteLine("-----------------------------------");
+        Escribir("-----------------------------------");
     }
     public void MostrarInfoInicial(int repartidor, int partidor)
     {
-        EscribeLineas();
-        Console.WriteLine($"El jugador {repartidor} comienza repartiendo cartas y el {partidor} parte jugando.");
+        EscribeLineasSeparadoras();
+        Escribir($"El jugador {repartidor} comienza repartiendo cartas y el {partidor} parte jugando.");
     }
 
     public void MostrarQuienJuega(Jugador jugador)
     {
-        EscribeLineas();
-        Console.WriteLine($"Juega Jugador {jugador.Id}");
+        EscribeLineasSeparadoras();
+        Escribir($"Juega Jugador {jugador.Id}");
     }
 
     public void MostrarMesaActual(CartasEnMesa cartasEnMesa)
     {
         List<Carta> listaDeCartasEnLaMesa = cartasEnMesa.CartasDeLaMesa; 
-        Console.WriteLine("Mesa actual:");
+        Escribir("Mesa actual:");
         for (int i = 1; i < listaDeCartasEnLaMesa.Count + 1; i++)
         {
             Carta carta = listaDeCartasEnLaMesa[i - 1];
-            Console.WriteLine($"({i}) {carta}");
+            Escribir($"({i}) {carta}");
         }
     }
 
     public void MostrarManoJugador(Jugador jugador)
     {
-        Console.WriteLine("\nMano Jugador:");
+        Escribir("\nMano Jugador:");
         for (int i = 1; i < jugador.Mano.Count + 1; i++)
         {
             Carta carta = jugador.Mano[i - 1];
-            Console.WriteLine($"({i}) {carta}");
+            Escribir($"({i}) {carta}");
         }
-        Console.WriteLine("¿Qué carta quieres bajar?");
-        Console.WriteLine($"(Ingresa un número entre 1 y {jugador.Mano.Count}");
+        Escribir("¿Qué carta quieres bajar?");
+        Escribir($"(Ingresa un número entre 1 y {jugador.Mano.Count}");
     }
     
     public int PedirJugada(List<Jugada> jugadas)
     {
-        Console.WriteLine($"Hay {jugadas.Count} jugadas en la mesa:");
+        Escribir($"Hay {jugadas.Count} jugadas en la mesa:");
         for (int i = 1; i < jugadas.Count + 1; i++)
         {
-            Console.WriteLine($"{i}- {jugadas[i - 1]}");
+            Escribir($"{i}- {jugadas[i - 1]}");
         }
         int idJugada = PedirNumeroValido(1, jugadas.Count);
         
@@ -65,7 +71,7 @@ public class Vista
         bool fuePosibleTransformarElString;
         do
         {
-            string? inputUsuario = Console.ReadLine();
+            string? inputUsuario = LeerLinea();
             fuePosibleTransformarElString = int.TryParse(inputUsuario, out numero);
         } while (!fuePosibleTransformarElString || numero < minValue || numero > maxValue);
 
@@ -74,28 +80,28 @@ public class Vista
     
     public void NoHayJugadaDisponible()
     {
-        Console.WriteLine($"Lamentablemente, no existe una combinación de cartas en la mesa que, sumada a la carta bajada, suman 15.");
+        Escribir($"Lamentablemente, no existe una combinación de cartas en la mesa que, sumada a la carta bajada, suman 15.");
     }
 
     public void SeVuelvenARepartirCartas()
     {
-        EscribeLineas();
-        Console.WriteLine("Los jugadores se quedaron sin cartas");
-        Console.WriteLine("Se vuelven a repatir 3 cartas a cada uno");
+        EscribeLineasSeparadoras();
+        Escribir("Los jugadores se quedaron sin cartas");
+        Escribir("Se vuelven a repatir 3 cartas a cada uno");
     }
 
     public void SeLlevaLasUltimasCartas(Jugador jugador, Jugada jugada)
     {
-        EscribeLineas();
-        Console.WriteLine($"Se jugaron todas las cartas de la baraja");
-        Console.WriteLine($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
-        Console.WriteLine($"Este es el jugador {jugador.Id}!");
+        EscribeLineasSeparadoras();
+        Escribir($"Se jugaron todas las cartas de la baraja");
+        Escribir($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
+        Escribir($"Este es el jugador {jugador.Id}!");
         JugadorSeLlevaLasCartas(jugador, jugada);
     }
     
     public void JugadorSeLlevaLasCartas(Jugador jugador ,Jugada jugada)
     {
-        Console.WriteLine($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada}");
+        Escribir($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada}");
         if (jugada.EsEscoba)
         {
             MostrarEscoba(jugador);
@@ -104,56 +110,63 @@ public class Vista
     
     public void MostrarEscoba(Jugador jugador)
     {
-        Console.WriteLine($"ESCOBA!************************************************** JUGADOR {jugador.Id}");
+        Escribir($"ESCOBA!************************************************** JUGADOR {jugador.Id}");
     }
 
     public void CartasGanadasEnEstaRonda(Jugadores jugadores)
     {
-        EscribeLineas();
-        Console.WriteLine("Cartas ganadas en esta ronda:");
-        jugadores.MostrarCartasGanadas();
+        EscribeLineasSeparadoras();
+        Escribir("Cartas ganadas en esta ronda:");
+        foreach (var jugador in jugadores.ObtenerJugadores)
+        {
+            EscribeJugador(jugador);
+            foreach (var jugada in jugador.ListaDeJugadas)
+            {
+                MostrarJugada(jugada);
+            }
+        }
     }
+    public void EscribeJugador(Jugador jugador)
+    {
+        Escribir($"Jugador {jugador.Id}:");
+    }
+    
+    public void MostrarJugada(Jugada jugada)
+    {
+        Escribir($"{jugada}. Es Escoba: {jugada.EsEscoba}");
+    }
+
     
     public void TotalPuntosGanadosJugadores(Jugadores jugadores)
     {
-        EscribeLineas();
-        Console.WriteLine("Total puntos ganados");
+        EscribeLineasSeparadoras();
+        Escribir("Total puntos ganados");
         foreach (var jugador in jugadores.ObtenerJugadores)
         {
-            Console.WriteLine($"    Jugador {jugador.Id}: {jugador.Puntaje}");
+            Escribir($"    Jugador {jugador.Id}: {jugador.Puntaje}");
         }
     }
 
     public void HayUnaODosEscobasAlComienzo()
     {
-        EscribeLineas();
-        Console.WriteLine("Las cuatro cartas depositadas sobre la mesa suman exactamente uno o dos grupos de 15");
-        Console.WriteLine("Por lo tanto el jugador que reparte las cartas se lleva las cartas para sí");
+        EscribeLineasSeparadoras();
+        Escribir("Las cuatro cartas depositadas sobre la mesa suman exactamente uno o dos grupos de 15");
+        Escribir("Por lo tanto el jugador que reparte las cartas se lleva las cartas para sí");
     }
 
     public void FinalDePartida()
     {
-        EscribeLineas();
-        Console.WriteLine("Ha llegado el final de la partida!");
+        EscribeLineasSeparadoras();
+        Escribir("Ha llegado el final de la partida!");
     }
 
     public void GanaUnJugador(Jugador jugador)
     {
-        Console.WriteLine($"El jugador {jugador.Id} GANA LA PARTIDA CON {jugador.Puntaje} PUNTOS");
+        Escribir($"El jugador {jugador.Id} GANA LA PARTIDA CON {jugador.Puntaje} PUNTOS");
     }
 
     public void HuboUnEmpate(Jugador ganadorUno, Jugador ganadorDos)
     {
-        Console.WriteLine($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
-    }
-
-    public static void MostrarJugada(Jugada jugada)
-    {
-        Console.WriteLine($"{jugada}. Es Escoba: {jugada.EsEscoba}");
-    }
-
-    public static void EscribeJugador(Jugador jugador)
-    {
-        Console.WriteLine($"Jugador {jugador.Id}:");
+        Escribir($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
     }
 }

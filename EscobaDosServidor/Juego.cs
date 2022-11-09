@@ -24,9 +24,9 @@ public class Juego
         PonerMesa();
     }
     
-    public static Juego Crear() => new Juego(new Vista());
+    public static Juego Crear() => new Juego(new VistaConsola());
 
-    public static Juego CrearConJugadorAleatorio() => new Juego(new VistaJugadorAleatorio());
+    // public static Juego CrearConJugadorAleatorio() => new Juego(new VistaJugadorAleatorio());
 
     private void CrearJugadores() => _jugadores = new Jugadores(NumJugadores);
     private void CrearMazo() => _mazoCartas = new MazoCartas();
