@@ -4,10 +4,12 @@ public class CalculadorPuntajeJugadorPorRonda
 {
     private int _puntaje = 0;
     private Jugador _jugador;
+    private RecuentoPuntosJugador _recuentoPuntosJugador;
 
     public CalculadorPuntajeJugadorPorRonda(Jugador jugador)
     {
         _jugador = jugador;
+        _recuentoPuntosJugador = new RecuentoPuntosJugador(_jugador);
     }
 
     public int Puntaje
@@ -30,151 +32,40 @@ public class CalculadorPuntajeJugadorPorRonda
     }
      public void PuntajePorEscoba()
     {
-        _puntaje += NumeroDeEscobas();
+        _puntaje += _recuentoPuntosJugador.NumeroDeEscobas();
     }
-    
-    private int NumeroDeEscobas()
-    {
-        int numeroDeEscobas = 0;
-        foreach (var jugada in _jugador.ListaDeJugadas)
-        {
-            if (jugada.EsEscoba)
-            {
-                numeroDeEscobas++;
-            }
-        }
-
-        return numeroDeEscobas;
-    }
-
+     
     private void PuntajePorSieteDeOro()
     {
-        if (TieneSieteDeOro())
+        if (_recuentoPuntosJugador.TieneSieteDeOro())
         {
             _puntaje++;
         }
     }
-
-    private bool TieneSieteDeOro()
-    {
-        bool tieneSieteDeOro = false;
-        foreach (var jugada in _jugador.ListaDeJugadas)
-        {
-            if (jugada.TieneSieteDeOro())
-            {
-                tieneSieteDeOro = true;
-            }
-        }
-
-        return tieneSieteDeOro;
-    }
+    
     private void PuntajePorMayoriaDeSietes()
     {
-        if (TieneMayoriaDeSietes())
+        if (_recuentoPuntosJugador.TieneDosOMasSietes())
         {
             _puntaje++;
         }
 
     }
-    private bool TieneMayoriaDeSietes()
-    {
-        int numeroDeSietes = NumeroDeSietesQueTieneJugador();
-        bool tieneMayoriaDeSietes = TieneDosOMasSietes(numeroDeSietes);
-        return tieneMayoriaDeSietes;
-    }
 
-    private int NumeroDeSietesQueTieneJugador()
-    {
-        int numeroDeSietes = 0;
-        foreach (var jugada in _jugador.ListaDeJugadas)
-        {
-            int numeroDeSietesEnJugada = jugada.NumeroDeSietesEnJugada();
-            numeroDeSietes += numeroDeSietesEnJugada;
-        }
-
-        return numeroDeSietes;
-    }
-    
-    private bool TieneDosOMasSietes(int numeroDeSietes)
-    {
-        if (numeroDeSietes >= 2) { return true; }
-        else { return false; }
-    }
-    
     private void PuntajePorMayoriaDeCartas()
     {
-        if (TieneMayoriaDeCartas())
+        if (_recuentoPuntosJugador.TieneVeinteOMasCartas())
         {
             _puntaje++;
         }
     }
-    
-    private bool TieneMayoriaDeCartas()
-    {
-        int numeroDeCartasEnJugadas = NumeroDeCartasEnJugadas();
-        bool tieneMayoriaDeCartas = TieneMasDeVeinteCartas(numeroDeCartasEnJugadas);
-        return tieneMayoriaDeCartas;
-    }
 
-    private int NumeroDeCartasEnJugadas()
-    {
-        int numCartas = 0;
-        foreach (var jugada in _jugador.ListaDeJugadas)
-        {
-            numCartas += jugada.NumeroDeCartasDeJugada;
-        }
-
-        return numCartas;
-    }
-    
-    private bool TieneMasDeVeinteCartas(int numCartas)
-    {
-        if (numCartas >= 20)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
     private void PuntajePorMayoriaDeOros()
     {
-        if (TieneMayoriaDeOros())
+        if (_recuentoPuntosJugador.TieneCincoOMasOros())
         {
             _puntaje++;
         }
-
     }
     
-    private bool TieneMayoriaDeOros()
-    {
-        int numeroDeOrosEnJugadas = NumeroDeOrosEnJugadas();
-        bool tieneMayoriaDeOros = TieneCincoOMasOros(numeroDeOrosEnJugadas);
-        return tieneMayoriaDeOros;
-    }
-
-    private int NumeroDeOrosEnJugadas()
-    {
-        int numeroDeOrosEnJugadas = 0;
-        foreach (var jugada in _jugador.ListaDeJugadas)
-        {
-            numeroDeOrosEnJugadas += jugada.NumeroDeOrosEnJugada();
-        }
-
-        return numeroDeOrosEnJugadas;
-    }
-
-    private bool TieneCincoOMasOros(int numeroOros)
-    {
-        if (numeroOros >= 5)
-        {
-            return true; 
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

@@ -45,15 +45,6 @@ public class Jugadores
         }   
     }
 
-    // public void MostrarCartasGanadas()
-    // {
-    //     foreach (var jugador in _jugadores)
-    //     {
-    //         Vista.EscribeJugador(jugador);
-    //         jugador.MostrarCartasGanadas();
-    //     }
-    // }
-    
     public void CalcularPuntajes()
     {
         foreach (var jugador in _jugadores)
