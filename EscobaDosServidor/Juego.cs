@@ -26,8 +26,22 @@ public class Juego
         RepartirCartas();
         PonerMesa();
     }
+
+    public static Juego Crear()
+    {
+        _vista.MostrarManerasDeJugarJuego();
+        int idModo = _vista.EscogerModoLocalOServidor();
+        if (idModo == 0)
+        {
+            return new Juego(new VistaConsola());
+        }
+        else
+        {
+            return new Juego(new VistaSocket());
+        }
+    }
     
-    public static Juego Crear() => new Juego(new VistaConsola());
+    // public static Juego Crear() => new Juego(new VistaConsola());
     
     // public static Juego Crear() => new Juego(new VistaSocket());
 

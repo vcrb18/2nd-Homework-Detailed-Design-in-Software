@@ -177,4 +177,19 @@ public abstract class Vista
         Escribir($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
     }
 
+    public void MostrarManerasDeJugarJuego()
+    {
+        EscribirLinea("Existen dos maneras de jugar a la escoba: modo local o modo servidor");
+        Escribir(" (0) Local,");
+        EscribirLinea(" (1) Servidor");
+        EscribirLinea("¿En qué modo quieres jugar?");
+        EscribirLinea("(Ingresa 0 para jugar en modo Local o 1 en el otro caso)");
+    }
+
+    public int EscogerModoLocalOServidor()
+    {
+        int idModo = PedirNumeroValido(0, 1);
+        return idModo;
+    }
+
 }
