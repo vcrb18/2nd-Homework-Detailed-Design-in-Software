@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Servidor;
 
 public class Juego
@@ -13,6 +15,7 @@ public class Juego
     private static CartasEnMesa _cartasEnMesa;
     private static Vista _vista;
     private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>();
+    private bool _vistaSocket = true;
 
     public Juego(Vista vista)
     {
@@ -244,8 +247,10 @@ public class Juego
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
         _vista.MostrarQuienJuega(jugador);
         _vista.MostrarMesaActual(_cartasEnMesa);
+        
         _vista.MostrarManoJugador(jugador);
         int idJugada = _vista.PedirCarta(1, jugador.Mano.Count);
+        
         Carta cartaAJugar = jugador.Mano[idJugada - 1];
         ResetearJugadas();
         JugarTurnoJugador(cartaAJugar);
@@ -404,6 +409,7 @@ public class Juego
         {
             _idJugadorTurno = 0;
         }
+        _vista.CambiaIdJugadorTurno(_idJugadorTurno);
     }
     
     public void NuevoJuego()

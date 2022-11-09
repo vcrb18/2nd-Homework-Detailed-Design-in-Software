@@ -5,7 +5,9 @@ public abstract class Vista
     protected abstract void Escribir(string mensaje);
     protected abstract string LeerLinea();
     public virtual void Cerrar() {}
-    
+
+    public virtual void CambiaIdJugadorTurno(int idJugadorTurno) {}
+
     protected void EscribirLinea(string mensaje) => Escribir(mensaje + "\n");
     protected void EscribirLinea() => EscribirLinea("");
     public void EscribeLineasSeparadoras()
@@ -170,5 +172,10 @@ public abstract class Vista
     public void HuboUnEmpate(Jugador ganadorUno, Jugador ganadorDos)
     {
         Escribir($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
+    }
+
+    public void ExcepcionVistaSocket(Exception exception)
+    {
+        EscribirLinea(exception.ToString());
     }
 }
