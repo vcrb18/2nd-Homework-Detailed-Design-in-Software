@@ -7,52 +7,52 @@ public abstract class Vista
     public virtual void Cerrar() {}
     
     protected void EscribirLinea(string mensaje) => Escribir(mensaje + "\n");
-    // protected void EscribirLinea() => EscribirLinea("");
+    protected void EscribirLinea() => EscribirLinea("");
     public void EscribeLineasSeparadoras()
     {
-        Escribir("-----------------------------------");
+        Escribir("-----------------------------------" + "\n");
     }
     public void MostrarInfoInicial(int repartidor, int partidor)
     {
         EscribeLineasSeparadoras();
-        Escribir($"El jugador {repartidor} comienza repartiendo cartas y el {partidor} parte jugando.");
+        EscribirLinea($"El jugador {repartidor} comienza repartiendo cartas y el {partidor} parte jugando.");
     }
 
     public void MostrarQuienJuega(Jugador jugador)
     {
         EscribeLineasSeparadoras();
-        Escribir($"Juega Jugador {jugador.Id}");
+        EscribirLinea($"Juega Jugador {jugador.Id}");
     }
 
     public void MostrarMesaActual(CartasEnMesa cartasEnMesa)
     {
         List<Carta> listaDeCartasEnLaMesa = cartasEnMesa.CartasDeLaMesa; 
-        Escribir("Mesa actual:");
+        Escribir("Mesa actual: ");
         for (int i = 1; i < listaDeCartasEnLaMesa.Count + 1; i++)
         {
             Carta carta = listaDeCartasEnLaMesa[i - 1];
-            Escribir($"({i}) {carta}");
+            Escribir($" ({i}) {carta} ,");
         }
     }
 
     public void MostrarManoJugador(Jugador jugador)
     {
-        Escribir("\nMano Jugador:");
+        Escribir("\nMano Jugador: " );
         for (int i = 1; i < jugador.Mano.Count + 1; i++)
         {
             Carta carta = jugador.Mano[i - 1];
-            Escribir($"({i}) {carta}");
+            Escribir($" ({i}) {carta} ,");
         }
-        Escribir("¿Qué carta quieres bajar?");
-        Escribir($"(Ingresa un número entre 1 y {jugador.Mano.Count}");
+        EscribirLinea("\n¿Qué carta quieres bajar?");
+        EscribirLinea($"(Ingresa un número entre 1 y {jugador.Mano.Count})");
     }
     
     public int PedirJugada(List<Jugada> jugadas)
     {
-        Escribir($"Hay {jugadas.Count} jugadas en la mesa:");
+        EscribirLinea($"Hay {jugadas.Count} jugadas en la mesa:");
         for (int i = 1; i < jugadas.Count + 1; i++)
         {
-            Escribir($"{i}- {jugadas[i - 1]}");
+            EscribirLinea($"{i}- {jugadas[i - 1]}");
         }
         int idJugada = PedirNumeroValido(1, jugadas.Count);
         
@@ -86,22 +86,22 @@ public abstract class Vista
     public void SeVuelvenARepartirCartas()
     {
         EscribeLineasSeparadoras();
-        Escribir("Los jugadores se quedaron sin cartas");
-        Escribir("Se vuelven a repatir 3 cartas a cada uno");
+        EscribirLinea("Los jugadores se quedaron sin cartas");
+        EscribirLinea("Se vuelven a repatir 3 cartas a cada uno");
     }
 
     public void SeLlevaLasUltimasCartas(Jugador jugador, Jugada jugada)
     {
         EscribeLineasSeparadoras();
-        Escribir($"Se jugaron todas las cartas de la baraja");
-        Escribir($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
-        Escribir($"Este es el jugador {jugador.Id}!");
+        EscribirLinea($"Se jugaron todas las cartas de la baraja");
+        EscribirLinea($"Las cartas sobrantes en la mesa se las lleva el último jugador que haya logrado llevarse las cartas en su turno");
+        EscribirLinea($"Este es el jugador {jugador.Id}!");
         JugadorSeLlevaLasCartas(jugador, jugada);
     }
     
     public void JugadorSeLlevaLasCartas(Jugador jugador ,Jugada jugada)
     {
-        Escribir($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada}");
+        EscribirLinea($"Jugador {jugador.Id} se lleva las siguientes cartas: {jugada}");
         if (jugada.EsEscoba)
         {
             MostrarEscoba(jugador);
@@ -116,7 +116,7 @@ public abstract class Vista
     public void CartasGanadasEnEstaRonda(Jugadores jugadores)
     {
         EscribeLineasSeparadoras();
-        Escribir("Cartas ganadas en esta ronda:");
+        EscribirLinea("Cartas ganadas en esta ronda:");
         foreach (var jugador in jugadores.ObtenerJugadores)
         {
             EscribeJugador(jugador);
@@ -124,26 +124,28 @@ public abstract class Vista
             {
                 MostrarJugada(jugada);
             }
+            EscribirLinea();
         }
     }
     public void EscribeJugador(Jugador jugador)
     {
-        Escribir($"Jugador {jugador.Id}:");
+        Escribir($"Jugador {jugador.Id}: ");
     }
     
     public void MostrarJugada(Jugada jugada)
     {
-        Escribir($"{jugada}. Es Escoba: {jugada.EsEscoba}");
+        // Escribir($"{jugada}. Es Escoba: {jugada.EsEscoba}");
+        Escribir($"{jugada}, ");
     }
 
     
     public void TotalPuntosGanadosJugadores(Jugadores jugadores)
     {
         EscribeLineasSeparadoras();
-        Escribir("Total puntos ganados");
+        EscribirLinea("Total puntos ganados");
         foreach (var jugador in jugadores.ObtenerJugadores)
         {
-            Escribir($"    Jugador {jugador.Id}: {jugador.Puntaje}");
+            EscribirLinea($"    Jugador {jugador.Id}: {jugador.Puntaje}");
         }
     }
 
