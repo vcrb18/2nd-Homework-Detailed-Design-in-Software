@@ -101,65 +101,7 @@ public class Juego
 
         return esFinMazoYManos;
     }
-
-    private void FinalRonda()
-    {
-        UltimaJugadaDelMazo();
-        CalculaPuntos();
-        NuevoJuego();
-    }
     
-    // Tmb deberia sacarlo de aca
-    private static void UltimaJugadaDelMazo()
-    {
-        Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(_idUltimoJugadorEnLlevarseLasCartas);
-        List<Carta> cartasMesa = _cartasEnMesa.CartasDeLaMesa;
-        Jugada cartasSobrantes = new Jugada(cartasMesa, false);
-        jugadorEnLlevarseLasCartas.AgregarJugada(cartasSobrantes);
-        _vista.SeLlevaLasUltimasCartas(jugadorEnLlevarseLasCartas, cartasSobrantes);
-        _cartasEnMesa.SacarCartasDeLaMesa(cartasSobrantes.CartasQueFormanJugada);
-    }
-
-    private void CalculaPuntos()
-    {
-        _jugadores.CalcularPuntajes();
-        _vista.CartasGanadasEnEstaRonda(_jugadores);
-        _vista.TotalPuntosGanadosJugadores(_jugadores);
-    }
-    
-    private void CambiarRepartidorYJugador()
-    {
-        CambiarRepartidor();
-        CambiarJugador();
-    }
-
-    private static void CambiarRepartidor()
-    {
-        if (_idJugadorRepartidor == 0)
-        {
-            _idJugadorRepartidor = 1;
-        }
-        else
-        {
-            _idJugadorRepartidor = 0;
-        }
-    }
-
-    private void CambiarJugador()
-    {
-        if (_idJugadorPartidor == 0)
-        {
-            _idJugadorPartidor = 1;
-            _idJugadorTurno = 1;
-        }
-        else
-        {
-            _idJugadorPartidor = 0;
-            _idJugadorTurno = 0;
-        }
-    }
-    
-    // Ojito con esta
     private void JugarTurno()
     {
         SiNoTienenCartasSeReparte();
@@ -249,6 +191,63 @@ public class Juego
             _idJugadorTurno = 0;
         }
         _vista.CambiaIdJugadorTurno(_idJugadorTurno);
+    }
+
+    private void FinalRonda()
+    {
+        UltimaJugadaDelMazo();
+        CalculaPuntos();
+        NuevoJuego();
+    }
+    
+    // Tmb deberia sacarlo de aca
+    private static void UltimaJugadaDelMazo()
+    {
+        Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(_idUltimoJugadorEnLlevarseLasCartas);
+        List<Carta> cartasMesa = _cartasEnMesa.CartasDeLaMesa;
+        Jugada cartasSobrantes = new Jugada(cartasMesa, false);
+        jugadorEnLlevarseLasCartas.AgregarJugada(cartasSobrantes);
+        _vista.SeLlevaLasUltimasCartas(jugadorEnLlevarseLasCartas, cartasSobrantes);
+        _cartasEnMesa.SacarCartasDeLaMesa(cartasSobrantes.CartasQueFormanJugada);
+    }
+
+    private void CalculaPuntos()
+    {
+        _jugadores.CalcularPuntajes();
+        _vista.CartasGanadasEnEstaRonda(_jugadores);
+        _vista.TotalPuntosGanadosJugadores(_jugadores);
+    }
+    
+    private void CambiarRepartidorYJugador()
+    {
+        CambiarRepartidor();
+        CambiarJugador();
+    }
+
+    private static void CambiarRepartidor()
+    {
+        if (_idJugadorRepartidor == 0)
+        {
+            _idJugadorRepartidor = 1;
+        }
+        else
+        {
+            _idJugadorRepartidor = 0;
+        }
+    }
+
+    private void CambiarJugador()
+    {
+        if (_idJugadorPartidor == 0)
+        {
+            _idJugadorPartidor = 1;
+            _idJugadorTurno = 1;
+        }
+        else
+        {
+            _idJugadorPartidor = 0;
+            _idJugadorTurno = 0;
+        }
     }
     
     private void NuevoJuego()
