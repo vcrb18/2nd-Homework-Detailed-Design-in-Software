@@ -1,16 +1,22 @@
 namespace Servidor;
 
-public class JugadasDeJugadoresEnJuego
+public class ControladorDeJugadasEnJuego
 {
-    private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>();
-    private CartasEnMesa _cartasEnMesa;
-    private int _target = 15;
-    private Vista _vista;
-    private Jugadores _jugadores;
-    private int _idJugadorRepartidor;
-    private static int _idUltimoJugadorEnLlevarseLasCartas;
+    private List<Jugada> _listaDeJugadasPosibles = new List<Jugada>(); //
+    private CartasEnMesa _cartasEnMesa; //RELLENAR
+    private int _target = 15; //
+    private Vista _vista; //RELLENAR
+    private Jugadores _jugadores; // RELLENAR
+    private int _idJugadorRepartidor = 0; //
+    private static int _idUltimoJugadorEnLlevarseLasCartas; //
 
-    private void RevisarSiCartasMesaInicialesSumanQuince()
+    public ControladorDeJugadasEnJuego(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores)
+    {
+        _cartasEnMesa = cartasEnMesa;
+        _vista = vista;
+        _jugadores = jugadores;
+    }
+    public void RevisarSiCartasMesaInicialesSumanQuince()
     {
         CalculaQueCartasSumanQuince(_cartasEnMesa.CartasDeLaMesa, null, false);
         if (CuatroCartasMesaFormanUnaJugada()) { JugarJugadaAlComienzoDeMano(_listaDeJugadasPosibles[0]); }
@@ -18,7 +24,7 @@ public class JugadasDeJugadoresEnJuego
         ResetearJugadas();
     }
     
-    private void CalculaQueCartasSumanQuince(List<Carta> cartasQuePuedenSumarQuince, Carta cartaQueDebePertenecerAJugada, bool debeIncluirCarta)
+    public void CalculaQueCartasSumanQuince(List<Carta> cartasQuePuedenSumarQuince, Carta cartaQueDebePertenecerAJugada, bool debeIncluirCarta)
     {
         CalculaQueCartasSumanQuinceRecursivo(cartasQuePuedenSumarQuince,new List<Carta>(), cartaQueDebePertenecerAJugada, debeIncluirCarta);
     }
@@ -140,12 +146,12 @@ public class JugadasDeJugadoresEnJuego
         }
     }
     
-    private void ResetearJugadas()
+    public void ResetearJugadas()
     {
         _listaDeJugadasPosibles = new List<Jugada>();
     }
 
-    private bool HayAlMenosUnaJugadaDisponible()
+    public bool HayAlMenosUnaJugadaDisponible()
     {
         if (_listaDeJugadasPosibles.Count == 0)
         {
@@ -157,7 +163,7 @@ public class JugadasDeJugadoresEnJuego
         }
     }
     
-    private Jugada ObtieneJugadaJugador()
+    public Jugada ObtieneJugadaJugador()
     {
         Jugada jugada;
         int idJugada = ObtieneIdJugada();
@@ -172,5 +178,16 @@ public class JugadasDeJugadoresEnJuego
         else { idJugada = _vista.PedirJugada(_listaDeJugadasPosibles); }
 
         return idJugada;
+    }
+    
+    // private void JugarJugada(Jugada jugada)
+    // {
+    //     Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
+    //     AgregarJugadaAlJugador(jugada, jugador);
+    // }
+    
+    public CartasEnMesa CartasDeLaMesa
+    {
+        get { return _cartasEnMesa; }
     }
 }
