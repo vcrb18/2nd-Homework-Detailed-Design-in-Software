@@ -19,12 +19,18 @@ public class ControladorDeJugadasEnJuego
         _jugadores = jugadores;
         _algoritmoQueGuardaJugadasPosibles = new AlgoritmoQueGuardaJugadasPosibles(_cartasEnMesa);
     }
+    
+    private List<Jugada> ListaJugadasPosibles()
+    {
+        return _algoritmoQueGuardaJugadasPosibles.ListaDeJugadasPosibles;
+    }
+    
     public void RevisarSiCartasMesaInicialesSumanQuince()
     {
         // _algoritmoQueGuardaJugadasPosibles.CalculaQueCartasSumanQuince(_cartasEnMesa.CartasDeLaMesa, null, false);
         // _listaDeJugadasPosibles = _algoritmoQueGuardaJugadasPosibles.ListaDeJugadasPosibles;
         CalculaQueCartasSumanQuince(_cartasEnMesa.CartasDeLaMesa, null, false);
-        if (CuatroCartasMesaFormanUnaJugada()) { JugarJugadaAlComienzoDeMano(_algoritmoQueGuardaJugadasPosibles._listaDeJugadasPosibles[0]); }
+        if (CuatroCartasMesaFormanUnaJugada()) { JugarJugadaAlComienzoDeMano(ListaJugadasPosibles()[0]); }
         else if (CuatroCartasMesaFormanDosJugadasDeDosCartas()) { SeJueganDosJugadasAlComienzoDeMano(); }
         ResetearJugadas();
     }
@@ -34,7 +40,7 @@ public class ControladorDeJugadasEnJuego
     {
         _algoritmoQueGuardaJugadasPosibles.CalculaQueCartasSumanQuince(cartasQuePuedenSumarQuince,
             cartaQueDebePertenecerAJugada, debeIncluirCarta);
-        _listaDeJugadasPosibles = _algoritmoQueGuardaJugadasPosibles.ListaDeJugadasPosibles;
+        // _listaDeJugadasPosibles = _algoritmoQueGuardaJugadasPosibles.ListaDeJugadasPosibles;
     }
     
     // Desde aqui
@@ -96,7 +102,7 @@ public class ControladorDeJugadasEnJuego
     
     private bool CuatroCartasMesaFormanUnaJugada()
     {
-        if (_listaDeJugadasPosibles.Count == 1 && _listaDeJugadasPosibles[0].HayCuatroCartasEnJugada())
+        if (ListaJugadasPosibles().Count == 1 && ListaJugadasPosibles()[0].HayCuatroCartasEnJugada())
         {
             return true;
         }
@@ -130,7 +136,7 @@ public class ControladorDeJugadasEnJuego
     
     private bool CuatroCartasMesaFormanDosJugadasDeDosCartas()
     {
-        if (_listaDeJugadasPosibles.Count == 2 && AmbasJugadasSonDeDosCartas(_listaDeJugadasPosibles))
+        if (ListaJugadasPosibles().Count == 2 && AmbasJugadasSonDeDosCartas(ListaJugadasPosibles()))
         {
             return true;
         }
@@ -154,7 +160,7 @@ public class ControladorDeJugadasEnJuego
     
     private void SeJueganDosJugadasAlComienzoDeMano()
     {
-        foreach (var jugada in _listaDeJugadasPosibles)
+        foreach (var jugada in ListaJugadasPosibles())
         {
             JugarJugadaAlComienzoDeMano(jugada);
         }
@@ -168,7 +174,7 @@ public class ControladorDeJugadasEnJuego
 
     public bool HayAlMenosUnaJugadaDisponible()
     {
-        if (_listaDeJugadasPosibles.Count == 0)
+        if (ListaJugadasPosibles().Count == 0)
         {
             return false;
         }
@@ -182,15 +188,15 @@ public class ControladorDeJugadasEnJuego
     {
         Jugada jugada;
         int idJugada = ObtieneIdJugada();
-        jugada = _listaDeJugadasPosibles[idJugada];
+        jugada = ListaJugadasPosibles()[idJugada];
         return jugada;
     }
     
     private int ObtieneIdJugada()
     {
         int idJugada;
-        if (_listaDeJugadasPosibles.Count == 1) { idJugada = 0; }
-        else { idJugada = _vista.PedirJugada(_listaDeJugadasPosibles); }
+        if (ListaJugadasPosibles().Count == 1) { idJugada = 0; }
+        else { idJugada = _vista.PedirJugada(ListaJugadasPosibles()); }
 
         return idJugada;
     }
@@ -199,4 +205,6 @@ public class ControladorDeJugadasEnJuego
     {
         get { return _idUltimoJugadorEnLlevarseLasCartas;  }
     }
+
+
 }
