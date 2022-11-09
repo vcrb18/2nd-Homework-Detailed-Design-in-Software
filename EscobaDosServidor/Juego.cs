@@ -29,8 +29,8 @@ public class Juego
 
     public static Juego Crear()
     {
-        _vista.MostrarManerasDeJugarJuego();
-        int idModo = _vista.EscogerModoLocalOServidor();
+        VistaPreviaJuego.MostrarManerasDeJugarJuego();
+        int idModo = VistaPreviaJuego.EscogerModoLocalOServidor();
         if (idModo == 0)
         {
             return new Juego(new VistaConsola());

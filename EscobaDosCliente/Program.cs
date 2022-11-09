@@ -8,7 +8,7 @@ NetworkStream ns = client.GetStream();
 StreamWriter writer = new StreamWriter(ns);
 StreamReader reader = new StreamReader(ns);
 int myId = Convert.ToInt32(reader.ReadLine());
-
+Console.WriteLine($"Eres el jugador {myId}");
 string message = "";
 while (message != "[FIN JUEGO]")
 {
