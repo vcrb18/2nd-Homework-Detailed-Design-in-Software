@@ -101,7 +101,7 @@ public class ControladorDeJugadasEnJuego
 
     }
     
-    private void AgregarJugadaAlJugador(Jugada jugada, Jugador jugador)
+    public void AgregarJugadaAlJugador(Jugada jugada, Jugador jugador)
     {
         GuardarUltimoJugadorEnLlevarseCartas(jugador);
         jugador.AgregarJugada(jugada);
@@ -179,12 +179,6 @@ public class ControladorDeJugadasEnJuego
 
         return idJugada;
     }
-    
-    // private void JugarJugada(Jugada jugada)
-    // {
-    //     Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-    //     AgregarJugadaAlJugador(jugada, jugador);
-    // }
     
     public CartasEnMesa CartasDeLaMesa
     {
