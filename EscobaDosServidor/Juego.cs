@@ -49,20 +49,6 @@ public class Juego
     private void RepartirCartas() => _jugadores.RepartirCartas(_mazoCartas);
     private void PonerMesa() => _cartasEnMesa = new CartasEnMesa(_mazoCartas);
 
-    public static int idJugadorTurno
-    {
-        get { return _idJugadorTurno;  }
-    }
-    
-    public static int idJugadorRepartidor
-    {
-        get { return _idJugadorRepartidor;  }
-    }
-    public static int IdUltimoJugadorEnLlevarseLasCartas
-    {
-        get { return _idUltimoJugadorEnLlevarseLasCartas;  }
-    }
-
     public void Jugar()
     {
         while (!EsFinJuego())
