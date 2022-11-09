@@ -57,6 +57,34 @@ public class VistaSocket : Vista
         _writerDos.Flush();
     }
 
+    protected override void EscribirManoJugador(string mensaje)
+    {
+        if (_idJugadorTurno == _idJugadorUno)
+        {
+            _writer.WriteLine(mensaje);
+            _writer.Flush();
+        }
+        else
+        {
+            _writerDos.WriteLine(mensaje);
+            _writerDos.Flush();
+        }
+    }
+    
+    protected override void EscribirManoJugadorLinea(string mensaje)
+    {
+        if (_idJugadorTurno == _idJugadorUno)
+        {
+            _writer.WriteLine(mensaje);
+            _writer.Flush();
+        }
+        else
+        {
+            _writerDos.WriteLine(mensaje);
+            _writerDos.Flush();
+        }
+    }
+
     protected override string LeerLinea()
     {
         EscribirLinea($"[INGRESE INPUT JUGADOR {_idJugadorTurno}]");

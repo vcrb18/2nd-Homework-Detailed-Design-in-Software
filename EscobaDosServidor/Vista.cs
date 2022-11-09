@@ -10,6 +10,9 @@ public abstract class Vista
 
     protected void EscribirLinea(string mensaje) => Escribir(mensaje + "\n");
     protected void EscribirLinea() => EscribirLinea("");
+
+    protected virtual void EscribirManoJugador(string mensaje) => Escribir(mensaje);
+    protected virtual void EscribirManoJugadorLinea(string mensaje) => EscribirManoJugador(mensaje + "\n");
     public void EscribeLineasSeparadoras()
     {
         Escribir("-----------------------------------" + "\n");
@@ -39,14 +42,14 @@ public abstract class Vista
 
     public void MostrarManoJugador(Jugador jugador)
     {
-        Escribir("\nMano Jugador: " );
+        EscribirManoJugador("\nMano Jugador: " );
         for (int i = 1; i < jugador.Mano.Count + 1; i++)
         {
             Carta carta = jugador.Mano[i - 1];
-            Escribir($" ({i}) {carta} ,");
+            EscribirManoJugador($" ({i}) {carta} ,");
         }
-        EscribirLinea("\n¿Qué carta quieres bajar?");
-        EscribirLinea($"(Ingresa un número entre 1 y {jugador.Mano.Count})");
+        EscribirManoJugadorLinea("\n¿Qué carta quieres bajar?");
+        EscribirManoJugadorLinea($"(Ingresa un número entre 1 y {jugador.Mano.Count})");
     }
     
     public int PedirJugada(List<Jugada> jugadas)
@@ -174,8 +177,4 @@ public abstract class Vista
         Escribir($"El jugador {ganadorUno.Id} EMPATÓ con el jugador {ganadorDos.Id} con un total de {ganadorUno.Puntaje} Puntos.");
     }
 
-    public void ExcepcionVistaSocket(Exception exception)
-    {
-        EscribirLinea(exception.ToString());
-    }
 }

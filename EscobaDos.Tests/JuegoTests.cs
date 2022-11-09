@@ -17,66 +17,66 @@ public class JuegoTests
     
     }
 
-    [Fact]
-    public void CambiarTurno_CambiaElIdJugadorTurno()
-    {
-        int idJugadorTurno = Juego.idJugadorTurno;
-    
-        Juego.CambiarTurno();
-        int nuevoIdJugadorTurno = Juego.idJugadorTurno;
-    
-        Assert.NotEqual(nuevoIdJugadorTurno, idJugadorTurno);
-        
-    }
-    
-    [Fact]
-    public void CambiarTurno_CambiarDosVecesVuelveAlOriginal()
-    {
-        int idJugadorTurno = Juego.idJugadorTurno;
-    
-        Juego.CambiarTurno();
-        Juego.CambiarTurno();
-        int nuevoIdJugadorTurno = Juego.idJugadorTurno;
-    
-        Assert.Equal(nuevoIdJugadorTurno, idJugadorTurno);
-        
-    }
-    
-    [Fact]
-    public void GuardarUltimoJugadorEnLlevarseCartas_GuardaIdCorrectamente()
-    {
-        Jugador jugador = new Jugador(0);
-        int idJugador = jugador.Id;
-        
-        Juego.GuardarUltimoJugadorEnLlevarseCartas(jugador);
-        int idJugadorEnLlevarseLasCartas = Juego.IdUltimoJugadorEnLlevarseLasCartas;
-        
-        Assert.Equal(idJugador, idJugadorEnLlevarseLasCartas);
-    }
-    
-    [Fact]
-    public void CambiarRepartidor_IdCambiaDeCeroAUno()
-    {
-        int idJugadorRepartidor = Juego.idJugadorRepartidor;
-        
-        Juego.CambiarRepartidor();
-        int nuevoIdJugadorRepartidor = Juego.idJugadorRepartidor;
-        
-        Assert.NotEqual(idJugadorRepartidor, nuevoIdJugadorRepartidor);
-    }
-    
-    [Fact]
-    public void CambiarRepartidor_CambiarDosVecesVuelveAlMismoJugador()
-    {
-        int idJugadorRepartidor = Juego.idJugadorRepartidor;
-        
-        Juego.CambiarRepartidor();
-        Juego.CambiarRepartidor();
-    
-        int nuevoIdJugadorRepartidor = Juego.idJugadorRepartidor;
-        
-        Assert.Equal(idJugadorRepartidor, nuevoIdJugadorRepartidor);
-    }
+    // [Fact]
+    // public void CambiarTurno_CambiaElIdJugadorTurno()
+    // {
+    //     int idJugadorTurno = Juego.idJugadorTurno;
+    //
+    //     Juego.CambiarTurno();
+    //     int nuevoIdJugadorTurno = Juego.idJugadorTurno;
+    //
+    //     Assert.NotEqual(nuevoIdJugadorTurno, idJugadorTurno);
+    //     
+    // }
+    //
+    // [Fact]
+    // public void CambiarTurno_CambiarDosVecesVuelveAlOriginal()
+    // {
+    //     int idJugadorTurno = Juego.idJugadorTurno;
+    //
+    //     Juego.CambiarTurno();
+    //     Juego.CambiarTurno();
+    //     int nuevoIdJugadorTurno = Juego.idJugadorTurno;
+    //
+    //     Assert.Equal(nuevoIdJugadorTurno, idJugadorTurno);
+    //     
+    // }
+    //
+    // [Fact]
+    // public void GuardarUltimoJugadorEnLlevarseCartas_GuardaIdCorrectamente()
+    // {
+    //     Jugador jugador = new Jugador(0);
+    //     int idJugador = jugador.Id;
+    //     
+    //     Juego.GuardarUltimoJugadorEnLlevarseCartas(jugador);
+    //     int idJugadorEnLlevarseLasCartas = Juego.IdUltimoJugadorEnLlevarseLasCartas;
+    //     
+    //     Assert.Equal(idJugador, idJugadorEnLlevarseLasCartas);
+    // }
+    //
+    // [Fact]
+    // public void CambiarRepartidor_IdCambiaDeCeroAUno()
+    // {
+    //     int idJugadorRepartidor = Juego.idJugadorRepartidor;
+    //     
+    //     Juego.CambiarRepartidor();
+    //     int nuevoIdJugadorRepartidor = Juego.idJugadorRepartidor;
+    //     
+    //     Assert.NotEqual(idJugadorRepartidor, nuevoIdJugadorRepartidor);
+    // }
+    //
+    // [Fact]
+    // public void CambiarRepartidor_CambiarDosVecesVuelveAlMismoJugador()
+    // {
+    //     int idJugadorRepartidor = Juego.idJugadorRepartidor;
+    //     
+    //     Juego.CambiarRepartidor();
+    //     Juego.CambiarRepartidor();
+    //
+    //     int nuevoIdJugadorRepartidor = Juego.idJugadorRepartidor;
+    //     
+    //     Assert.Equal(idJugadorRepartidor, nuevoIdJugadorRepartidor);
+    // }
     
     // [Fact]
     // public void AlgunJugadorGanoElJuego_InicialmenteNadieHaGanado()
