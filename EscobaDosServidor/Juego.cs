@@ -17,6 +17,7 @@ public class Juego
 
     private static ControladorDeJugadasEnJuego _controladorDeJugadasEnJuego;
     private ControladorJuegaTurno _controladorJuegaTurno;
+    private GanadorDelJuego _ganadorDelJuego;
 
     public Juego(Vista vista)
     {
@@ -28,6 +29,7 @@ public class Juego
         PonerMesa();
         CrearSegundoControlador();
         CrearTercerControlador();
+        CreaGanadorJuego();
     }
 
     public static Juego Crear()
@@ -60,6 +62,10 @@ public class Juego
         _controladorJuegaTurno =
             new ControladorJuegaTurno(_cartasEnMesa, _vista, _jugadores, _controladorDeJugadasEnJuego);
 
+    private void CreaGanadorJuego() =>
+        _ganadorDelJuego =
+            new GanadorDelJuego(_jugadores, _vista);
+
     public void Jugar()
     {
         while (!EsFinJuego())
@@ -74,7 +80,8 @@ public class Juego
             }
             FinalRonda();
         }
-        RevisaQuienGanoJuego();
+        _ganadorDelJuego.RevisaQuienGanoJuego();
+        // RevisaQuienGanoJuego();
     }
     
     private bool EsFinJuego()
@@ -185,31 +192,6 @@ public class Juego
             _idJugadorPartidor = 0;
             _idJugadorTurno = 0;
         }
-    }
-    
-
-    
-    private void RevisaQuienGanoJuego()
-    {
-        List<Jugador> listaConGanadorOGanadores = _jugadores.GanadorOGanadoresDelJuego();
-        if (listaConGanadorOGanadores.Count == 1) { GanoUnJugador(listaConGanadorOGanadores); }
-        else if (listaConGanadorOGanadores.Count == 2) { HuboUnEmpate(listaConGanadorOGanadores); }
-    }
-    
-    private void GanoUnJugador(List<Jugador> listaConJugadorGanador)
-    {
-        int idJugadorGanador = _jugadores.ObtenerIdPrimerGanador(listaConJugadorGanador);
-        Jugador jugadorGanador = _jugadores.ObtenerJugador(idJugadorGanador);
-        _vista.GanaUnJugador(jugadorGanador);
-    }
-
-    private void HuboUnEmpate(List<Jugador> listaConJugadoresGanadores)
-    {
-        int idJugadorGanadorUno = _jugadores.ObtenerIdPrimerGanador(listaConJugadoresGanadores);
-        Jugador jugadorGanadorUno = _jugadores.ObtenerJugador(idJugadorGanadorUno);
-        int idJugadorGanadorDos = _jugadores.ObtenerIdSegundoGanador(listaConJugadoresGanadores);
-        Jugador jugadorGanadorDos = _jugadores.ObtenerJugador(idJugadorGanadorDos);
-        _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
     }
 
 }

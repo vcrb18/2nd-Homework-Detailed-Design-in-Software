@@ -7,6 +7,7 @@ public class ControladorJuegaTurno
     private static Vista _vista;
     private CartasEnMesa _cartasEnMesa;
     private ControladorDeJugadasEnJuego _controladorDeJugadasEnJuego;
+    
 
     public ControladorJuegaTurno(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores, ControladorDeJugadasEnJuego controladorDeJugadasEnJuego)
     {
