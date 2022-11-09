@@ -71,7 +71,6 @@ public class Juego
                 Console.WriteLine(_mazoCartas.CuantasCartasQuedan());
                 SiNoTienenCartasSeReparte();
                 _controladorJuegaTurno.JugarTurno();
-                // JugarTurno();
             }
             FinalRonda();
         }
@@ -119,88 +118,6 @@ public class Juego
             _vista.SeVuelvenARepartirCartas();
         }
     }
-    // private void JugarTurno()
-    // {
-    //     SiNoTienenCartasSeReparte();
-    //     Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-    //     _vista.MostrarQuienJuega(jugador);
-    //     _vista.MostrarMesaActual(_cartasEnMesa);
-    //     
-    //     _vista.MostrarManoJugador(jugador);
-    //     int idJugada = _vista.PedirCarta(1, jugador.Mano.Count);
-    //     
-    //     Carta cartaAJugar = jugador.Mano[idJugada - 1];
-    //     _controladorDeJugadasEnJuego.ResetearJugadas();
-    //     JugarTurnoJugador(cartaAJugar);
-    //     CambiarTurno();
-    // }
-    
-    
-    // private void JugarTurnoJugador(Carta cartaAJugar)
-    // {
-    //     CalcularJugadas(cartaAJugar);
-    //     BajarCarta(cartaAJugar);
-    //     RevisarJugadasDisponibles();
-    // }
-    
-    // private void CalcularJugadas(Carta cartaAJugar)
-    // {
-    //     
-    //     _controladorDeJugadasEnJuego.CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar, true);
-    // }
-    
-    // Ojito con esta
-    // private List<Carta> CartasQuePuedenSumarQuince(Carta cartaAJugar)
-    // {
-    //     List<Carta> cartasQuePuedenSumarQuince = new List<Carta>();
-    //     cartasQuePuedenSumarQuince.Add(cartaAJugar);
-    //     foreach (var carta in _cartasEnMesa.CartasDeLaMesa)
-    //     {
-    //         cartasQuePuedenSumarQuince.Add(carta);
-    //     }
-    //     return cartasQuePuedenSumarQuince;
-    // }
-    
-    // Ojito con esta
-    // private void BajarCarta(Carta carta)
-    // {
-    //     Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-    //     jugador.SacarCartaDeMano(carta);
-    //     _cartasEnMesa.AgregarCarta(carta);
-    // }
-
-    // private void RevisarJugadasDisponibles()
-    // {
-    //     if (! _controladorDeJugadasEnJuego.HayAlMenosUnaJugadaDisponible())
-    //     {
-    //         _vista.NoHayJugadaDisponible();
-    //     }
-    //     else
-    //     {
-    //         Jugada jugadaJugador = _controladorDeJugadasEnJuego.ObtieneJugadaJugador();
-    //         JugarJugada(jugadaJugador);
-    //     }
-    // }
-
-    // private void JugarJugada(Jugada jugada)
-    // {
-    //     Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-    //     _controladorDeJugadasEnJuego.AgregarJugadaAlJugador(jugada, jugador);
-    //     // AgregarJugadaAlJugador(jugada, jugador);
-    // }
-
-    // private static void CambiarTurno()
-    // {
-    //     if (_idJugadorTurno == 0)
-    //     {
-    //         _idJugadorTurno = 1;
-    //     }
-    //     else
-    //     {
-    //         _idJugadorTurno = 0;
-    //     }
-    //     _vista.CambiaIdJugadorTurno(_idJugadorTurno);
-    // }
 
     private void FinalRonda()
     {
@@ -226,6 +143,16 @@ public class Juego
         _jugadores.CalcularPuntajes();
         _vista.CartasGanadasEnEstaRonda(_jugadores);
         _vista.TotalPuntosGanadosJugadores(_jugadores);
+    }
+    
+    private void NuevoJuego()
+    {
+        _jugadores.ReiniciarListaJugadas();
+        CambiarRepartidorYJugador();
+        CrearMazo();
+        BarajarMazo();
+        RepartirCartas();
+        PonerMesa();
     }
     
     private void CambiarRepartidorYJugador()
@@ -260,15 +187,7 @@ public class Juego
         }
     }
     
-    private void NuevoJuego()
-    {
-        _jugadores.ReiniciarListaJugadas();
-        CambiarRepartidorYJugador();
-        CrearMazo();
-        BarajarMazo();
-        RepartirCartas();
-        PonerMesa();
-    }
+
     
     private void RevisaQuienGanoJuego()
     {
@@ -293,8 +212,4 @@ public class Juego
         _vista.HuboUnEmpate(jugadorGanadorUno, jugadorGanadorDos);
     }
 
-    public void ActualizarCartasEnMesa(CartasEnMesa cartasEnMesa)
-    {
-        _cartasEnMesa = cartasEnMesa;
-    }
 }

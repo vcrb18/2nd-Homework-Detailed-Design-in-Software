@@ -18,7 +18,6 @@ public class ControladorJuegaTurno
     
     public void JugarTurno()
     {
-        // SiNoTienenCartasSeReparte();
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
         _vista.MostrarQuienJuega(jugador);
         _vista.MostrarMesaActual(_cartasEnMesa);
@@ -45,7 +44,6 @@ public class ControladorJuegaTurno
         _controladorDeJugadasEnJuego.CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar, true);
     }
     
-    // Ojito con esta
     private List<Carta> CartasQuePuedenSumarQuince(Carta cartaAJugar)
     {
         List<Carta> cartasQuePuedenSumarQuince = new List<Carta>();
@@ -57,7 +55,6 @@ public class ControladorJuegaTurno
         return cartasQuePuedenSumarQuince;
     }
     
-    // Ojito con esta
     private void BajarCarta(Carta carta)
     {
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
@@ -82,7 +79,6 @@ public class ControladorJuegaTurno
     {
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
         _controladorDeJugadasEnJuego.AgregarJugadaAlJugador(jugada, jugador);
-        // AgregarJugadaAlJugador(jugada, jugador);
     }
 
     private static void CambiarTurno()
