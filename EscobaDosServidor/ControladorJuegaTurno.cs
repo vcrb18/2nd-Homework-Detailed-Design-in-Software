@@ -6,15 +6,15 @@ public class ControladorJuegaTurno
     private static int _idJugadorTurno = 1;
     private static Vista _vista;
     private CartasEnMesa _cartasEnMesa;
-    private ControladorDeJugadasEnJuego _controladorDeJugadasEnJuego;
+    private ControladorDeJugadasEnTurno _controladorDeJugadasEnTurno;
     
 
-    public ControladorJuegaTurno(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores, ControladorDeJugadasEnJuego controladorDeJugadasEnJuego)
+    public ControladorJuegaTurno(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores, ControladorDeJugadasEnTurno controladorDeJugadasEnTurno)
     {
         _cartasEnMesa = cartasEnMesa;
         _vista = vista;
         _jugadores = jugadores;
-        _controladorDeJugadasEnJuego = controladorDeJugadasEnJuego;
+        _controladorDeJugadasEnTurno = controladorDeJugadasEnTurno;
     }
     
     public void JugarTurno()
@@ -27,7 +27,7 @@ public class ControladorJuegaTurno
         int idJugada = _vista.PedirCarta(1, jugador.Mano.Count);
         
         Carta cartaAJugar = jugador.Mano[idJugada - 1];
-        _controladorDeJugadasEnJuego.ResetearJugadas();
+        _controladorDeJugadasEnTurno.ResetearJugadas();
         JugarTurnoJugador(cartaAJugar);
         CambiarTurno();
     }
@@ -42,7 +42,7 @@ public class ControladorJuegaTurno
     private void CalcularJugadas(Carta cartaAJugar)
     {
         
-        _controladorDeJugadasEnJuego.CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar, true);
+        _controladorDeJugadasEnTurno.CalculaQueCartasSumanQuince(CartasQuePuedenSumarQuince(cartaAJugar), cartaAJugar, true);
     }
     
     private List<Carta> CartasQuePuedenSumarQuince(Carta cartaAJugar)
@@ -65,13 +65,13 @@ public class ControladorJuegaTurno
 
     private void RevisarJugadasDisponibles()
     {
-        if (! _controladorDeJugadasEnJuego.HayAlMenosUnaJugadaDisponible())
+        if (! _controladorDeJugadasEnTurno.HayAlMenosUnaJugadaDisponible())
         {
             _vista.NoHayJugadaDisponible();
         }
         else
         {
-            Jugada jugadaJugador = _controladorDeJugadasEnJuego.ObtieneJugadaJugador();
+            Jugada jugadaJugador = _controladorDeJugadasEnTurno.ObtieneJugadaJugador();
             JugarJugada(jugadaJugador);
         }
     }
@@ -79,7 +79,7 @@ public class ControladorJuegaTurno
     private void JugarJugada(Jugada jugada)
     {
         Jugador jugador = _jugadores.ObtenerJugador(_idJugadorTurno);
-        _controladorDeJugadasEnJuego.AgregarJugadaAlJugador(jugada, jugador);
+        _controladorDeJugadasEnTurno.AgregarJugadaAlJugador(jugada, jugador);
     }
 
     private static void CambiarTurno()

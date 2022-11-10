@@ -1,6 +1,6 @@
 namespace Servidor;
 
-public class ControladorDeJugadasEnJuego
+public class ControladorDeJugadasEnTurno
 {
     private CartasEnMesa _cartasEnMesa;
     private int _target = 15;
@@ -11,12 +11,17 @@ public class ControladorDeJugadasEnJuego
 
     private AlgoritmoQueGuardaJugadasPosibles _algoritmoQueGuardaJugadasPosibles;
 
-    public ControladorDeJugadasEnJuego(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores)
+    public ControladorDeJugadasEnTurno(CartasEnMesa cartasEnMesa, Vista vista, Jugadores jugadores)
     {
         _cartasEnMesa = cartasEnMesa;
         _vista = vista;
         _jugadores = jugadores;
         _algoritmoQueGuardaJugadasPosibles = new AlgoritmoQueGuardaJugadasPosibles(_cartasEnMesa);
+    }
+    
+    public int IdUltimoJugadorEnLlevarseLasCartas
+    {
+        get { return _idUltimoJugadorEnLlevarseLasCartas;  }
     }
     
     private List<Jugada> ListaJugadasPosibles()
@@ -68,7 +73,7 @@ public class ControladorDeJugadasEnJuego
         _vista.JugadorSeLlevaLasCartas(jugador, jugada);
     }
     
-    public static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)
+    private static void GuardarUltimoJugadorEnLlevarseCartas(Jugador jugador)
     {
         _idUltimoJugadorEnLlevarseLasCartas = jugador.Id;
     }
@@ -107,7 +112,6 @@ public class ControladorDeJugadasEnJuego
     
     public void ResetearJugadas()
     {
-        // _listaDeJugadasPosibles = new List<Jugada>();
         _algoritmoQueGuardaJugadasPosibles.ResetearJugadas();
     }
 
@@ -139,11 +143,6 @@ public class ControladorDeJugadasEnJuego
 
         return idJugada;
     }
-
-    public int IdUltimoJugadorEnLlevarseLasCartas
-    {
-        get { return _idUltimoJugadorEnLlevarseLasCartas;  }
-    }
-
+    
 
 }

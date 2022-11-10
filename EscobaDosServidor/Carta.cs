@@ -31,7 +31,7 @@ public class Carta
         return diccionarioDeValoresCarta[_valor];
     }
 
-    public static Dictionary<string, int> DiccionarioDeValoresCarta()
+    private static Dictionary<string, int> DiccionarioDeValoresCarta()
     {
         Dictionary<string, int> diccionarioDeValoresCarta = new Dictionary<string, int>
         {

@@ -30,7 +30,7 @@ public class CalculadorPuntajeJugadorPorRonda
         PuntajePorMayoriaDeCartas();
         PuntajePorMayoriaDeOros();
     }
-     public void PuntajePorEscoba()
+    private void PuntajePorEscoba()
     {
         _puntaje += _recuentoPuntosJugador.NumeroDeEscobas();
     }

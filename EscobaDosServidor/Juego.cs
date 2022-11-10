@@ -15,7 +15,7 @@ public class Juego
     private static Vista _vista;
     private bool _vistaSocket = true;
 
-    private static ControladorDeJugadasEnJuego _controladorDeJugadasEnJuego;
+    private static ControladorDeJugadasEnTurno _controladorDeJugadasEnTurno;
     private ControladorJuegaTurno _controladorJuegaTurno;
     private GanadorDelJuego _ganadorDelJuego;
 
@@ -55,12 +55,12 @@ public class Juego
     private void PonerMesa() => _cartasEnMesa = new CartasEnMesa(_mazoCartas);
 
     private void CrearSegundoControlador() =>
-        _controladorDeJugadasEnJuego = 
-            new ControladorDeJugadasEnJuego(_cartasEnMesa, _vista, _jugadores);
+        _controladorDeJugadasEnTurno = 
+            new ControladorDeJugadasEnTurno(_cartasEnMesa, _vista, _jugadores);
 
     private void CrearTercerControlador() =>
         _controladorJuegaTurno =
-            new ControladorJuegaTurno(_cartasEnMesa, _vista, _jugadores, _controladorDeJugadasEnJuego);
+            new ControladorJuegaTurno(_cartasEnMesa, _vista, _jugadores, _controladorDeJugadasEnTurno);
 
     private void CreaGanadorJuego() =>
         _ganadorDelJuego =
@@ -70,7 +70,7 @@ public class Juego
     {
         while (!EsFinJuego())
         {
-            _controladorDeJugadasEnJuego.RevisarSiCartasMesaInicialesSumanQuince();
+            _controladorDeJugadasEnTurno.RevisarSiCartasMesaInicialesSumanQuince();
             _vista.MostrarInfoInicial(_idJugadorRepartidor, _idJugadorPartidor);
             while (!EsFinMazoYManos())
             {
@@ -81,7 +81,6 @@ public class Juego
             FinalRonda();
         }
         _ganadorDelJuego.RevisaQuienGanoJuego();
-        // RevisaQuienGanoJuego();
     }
     
     private bool EsFinJuego()
@@ -133,10 +132,9 @@ public class Juego
         NuevoJuego();
     }
     
-    // Tmb deberia sacarlo de aca
     private static void UltimaJugadaDelMazo()
     {
-        int idUltimoJugadorEnLlevarseLasCartas = _controladorDeJugadasEnJuego.IdUltimoJugadorEnLlevarseLasCartas;
+        int idUltimoJugadorEnLlevarseLasCartas = _controladorDeJugadasEnTurno.IdUltimoJugadorEnLlevarseLasCartas;
         Jugador jugadorEnLlevarseLasCartas = _jugadores.ObtenerJugador(idUltimoJugadorEnLlevarseLasCartas);
         List<Carta> cartasMesa = _cartasEnMesa.CartasDeLaMesa;
         Jugada cartasSobrantes = new Jugada(cartasMesa, false);
