@@ -15,12 +15,11 @@ public class CartaTests
     [InlineData("Rey", 10)]
     public void ConvierteStringValorAInt_StringDelValorDebeConvertirse(string valor, int expected)
     {
-        // Arrange
         Carta carta = new Carta("oro", valor);
         int valorEsperado = expected;
-        // Act
+        
         int valorNuevo = carta.ConvierteStringValorAInt();
-        // Assert
+        
         Assert.Equal(valorNuevo, valorEsperado);
     }
 

@@ -5,7 +5,7 @@ namespace EscobaDos.Tests;
 public class MazoCartasTests
 {
     [Fact]
-    public void GenerarCartas_SeCreaElMazoCompleto()
+    public void MazoCartas_SeCreaElMazoCompleto()
     {
         MazoCartas mazoCartas = new MazoCartas();
 
@@ -15,7 +15,7 @@ public class MazoCartasTests
     }
 
     [Fact]
-    public void BarajarCartas_ListaInicialDistintaABarajada()
+    public void AlgoritmoParaBarajarCartas_ListaInicialDistintaABarajada()
     {
         MazoCartas mazoCartas = new MazoCartas();
         List<Carta> cartasSinBarajar = CreaListaCartasMazo(mazoCartas);
@@ -70,7 +70,7 @@ public class MazoCartasTests
         Assert.True(seAcabaronLasCartas);
     }
     
-    public List<Carta> CreaListaCartasMazo(MazoCartas mazoCartas)
+    private List<Carta> CreaListaCartasMazo(MazoCartas mazoCartas)
     {
         List<Carta> cartasSinBarajar = new List<Carta>();
         for(int i = 0; i < mazoCartas.Cartas.Count; i++)

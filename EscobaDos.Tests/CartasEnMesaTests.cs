@@ -21,7 +21,7 @@ public class CartasEnMesaTests
     }
 
     [Fact]
-    public void SacarCartas_CartasMesaSeDescartan()
+    public void SacarCartasDeLaMesa_CartasMesaSeDescartan()
     {
         List<Carta> cartasADescartar = new List<Carta>();
         MazoCartas mazoCartas = new MazoCartas();

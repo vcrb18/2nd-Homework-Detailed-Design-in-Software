@@ -5,7 +5,7 @@ namespace EscobaDos.Tests;
 public class JugadoresTests
 {
     [Fact]
-    public void ManosVacias_TrueSiNoHayCartasEnMano()
+    public void AmbosJugadoresTienenManosVacias_TrueSiNoHayCartasEnMano()
     {
         Jugadores jugadores = new Jugadores(2);
     
@@ -18,7 +18,7 @@ public class JugadoresTests
     }
     
     [Fact]
-    public void ManosVacias_FalseSiHayCartasEnMano()
+    public void AmbosJugadoresTienenManosVacias_FalseSiHayCartasEnMano()
     {
         Jugadores jugadores = new Jugadores(2);
         MazoCartas mazoCartas = new MazoCartas();
@@ -30,7 +30,7 @@ public class JugadoresTests
     }
 
     [Fact]
-    public void ObtenerListaJugadoresGanadores_PuntajeIgualRetornaAmbosJugadores()
+    public void GanadorOGanadoresDelJuego_PuntajeIgualRetornaAmbosJugadores()
     {
         Jugadores jugadores = new Jugadores(2);
 

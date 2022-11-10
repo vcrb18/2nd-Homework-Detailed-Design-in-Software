@@ -4,14 +4,6 @@ namespace EscobaDos.Tests;
 
 public class JugadaTests
 {
-    [Theory]
-    [InlineData("Oro", "7", true)]
-    public void TieneSieteDeOro(string pinta, string valor, bool expected)
-    {
-        Carta carta = new Carta(pinta, valor);
-        bool valorEsperado = expected;
-    }
-
     [Fact]
     public void HayDosCartasEnJugada_SiHayDosCartasRetornaTrueSiNoFalse()
     {
@@ -25,21 +17,21 @@ public class JugadaTests
         Assert.False(hayDosCartasEnJugadaConUnaCarta);
     }
 
-    public Jugada creaJugadaConDosCartas()
+    private Jugada creaJugadaConDosCartas()
     {
         List<Carta> cartas = creaListaConDosCartas();
         Jugada jugada = new Jugada(cartas, false);
         return jugada;
     }
     
-    public Jugada creaJugadaConUnaCarta()
+    private Jugada creaJugadaConUnaCarta()
     {
         List<Carta> cartas = creaListaConUnaCarta();
         Jugada jugada = new Jugada(cartas, false);
         return jugada;
     }
 
-    public List<Carta> creaListaConDosCartas()
+    private List<Carta> creaListaConDosCartas()
     {
         List<Carta> cartas = new List<Carta>();
         Carta cartaUno = new Carta("Oro", "1");
@@ -49,7 +41,7 @@ public class JugadaTests
         return cartas;
     }
     
-    public List<Carta> creaListaConUnaCarta()
+    private List<Carta> creaListaConUnaCarta()
     {
         List<Carta> cartas = new List<Carta>();
         Carta cartaUno = new Carta("Espada", "Rey");
