@@ -57,7 +57,7 @@ public class Jugadores
     {
         if (HayEmpate())
         {
-            return listaJugadoresEmpatados();
+            return ListaJugadoresEmpatados();
         }
         else
         {
@@ -77,7 +77,7 @@ public class Jugadores
         }
     }
     
-    private List<Jugador> listaJugadoresEmpatados()
+    private List<Jugador> ListaJugadoresEmpatados()
     {
         List<Jugador> jugadoresGanadores = new List<Jugador>();
         jugadoresGanadores.Add(_jugadores[0]);

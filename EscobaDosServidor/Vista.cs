@@ -139,7 +139,6 @@ public abstract class Vista
     
     public void MostrarJugada(Jugada jugada)
     {
-        // Escribir($"{jugada}. Es Escoba: {jugada.EsEscoba}");
         Escribir($"{jugada}, ");
     }
 
@@ -157,14 +156,14 @@ public abstract class Vista
     public void HayUnaODosEscobasAlComienzo()
     {
         EscribeLineasSeparadoras();
-        Escribir("Las cuatro cartas depositadas sobre la mesa suman exactamente uno o dos grupos de 15");
-        Escribir("Por lo tanto el jugador que reparte las cartas se lleva las cartas para sí");
+        EscribirLinea("Las cuatro cartas depositadas sobre la mesa suman exactamente uno o dos grupos de 15");
+        EscribirLinea("Por lo tanto el jugador que reparte las cartas se lleva las cartas para sí");
     }
 
     public void FinalDePartida()
     {
         EscribeLineasSeparadoras();
-        Escribir("Ha llegado el final de la partida!");
+        EscribirLinea("Ha llegado el final de la partida!");
     }
 
     public void GanaUnJugador(Jugador jugador)

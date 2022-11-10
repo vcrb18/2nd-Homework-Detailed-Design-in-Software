@@ -59,7 +59,7 @@ public class MazoCartasTests
     public void SeAcabaronLasCartas_MazoFinalVacio()
     {
         MazoCartas mazoCartas = new MazoCartas();
-        int cartasEnElMazo = mazoCartas.CuantasCartasQuedan();
+        int cartasEnElMazo = mazoCartas.Cartas.Count;
         for (int i = 0; i < cartasEnElMazo; i++)
         {
             mazoCartas.SacarCartaSuperiorMazo();

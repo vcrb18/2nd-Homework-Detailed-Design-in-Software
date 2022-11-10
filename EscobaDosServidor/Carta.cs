@@ -52,7 +52,10 @@ public class Carta
     public bool EsSieteDeOro()
     {
         bool esSieteDeOro = false;
-        if (_pinta == "Oro" && _valor == "7") { esSieteDeOro = true; }
+        if (_pinta == "Oro" && _valor == "7")
+        {
+            esSieteDeOro = true;
+        }
 
         return esSieteDeOro;
     }

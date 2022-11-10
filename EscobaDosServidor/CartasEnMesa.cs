@@ -20,15 +20,16 @@ public class CartasEnMesa
         AgregarCarta(cartaSuperiorMazo);
     }
 
+    public void AgregarCarta(Carta carta)
+    {
+        _cartasEnMesa.Add(carta);
+    }
+    
     public List<Carta> CartasDeLaMesa
     {
         get { return _cartasEnMesa; }
     }
 
-    public void AgregarCarta(Carta carta)
-    {
-        _cartasEnMesa.Add(carta);
-    }
 
     public void SacarCartasDeLaMesa(List<Carta> cartas)
     {

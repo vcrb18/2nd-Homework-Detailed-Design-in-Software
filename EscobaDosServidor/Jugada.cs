@@ -16,16 +16,16 @@ public class Jugada
         get { return _cartasQueFormanJugada; }
     }
     
+    public bool EsEscoba
+    {
+        get { return _esEscoba; }
+    }
+    
     public int NumeroDeCartasDeJugada
     {
         get { return _cartasQueFormanJugada.Count; }
     }
     
-    public bool EsEscoba
-    {
-        get { return _esEscoba; }
-    }
-
     public override string ToString()
     {
         string s = "";

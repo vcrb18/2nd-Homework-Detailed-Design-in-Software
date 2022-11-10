@@ -74,7 +74,6 @@ public class Juego
             _vista.MostrarInfoInicial(_idJugadorRepartidor, _idJugadorPartidor);
             while (!EsFinMazoYManos())
             {
-                Console.WriteLine(_mazoCartas.CuantasCartasQuedan());
                 SiNoTienenCartasSeReparte();
                 _controladorJuegaTurno.JugarTurno();
             }

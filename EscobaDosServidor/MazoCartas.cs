@@ -104,8 +104,4 @@ public class MazoCartas
         }
     }
 
-    public int CuantasCartasQuedan()
-    {
-        return _cartas.Count;
-    }
 }
